@@ -1,0 +1,124 @@
+<include file="Public:header" />
+<style>
+.input-text{ width:60%;}
+</style>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统设定 <span class="c-gray en">&gt;</span> 参数设置 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container pd-20">
+	<form class="form form-horizontal" id="form-article-add" method="post" action="{:U('Setoutlay/index')}">
+		<div id="tab-system" class="HuiTab">
+			<div class="tabBar cl"><span>商品设定</span><span>佣金设定</span><span>产品黑名单</span></div>
+			<div class="tabCon">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>最大产品购买数量：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" placeholder="限制每产品数量（上限）" name="productnum" class="input-text" value="{$web_config['productnum']}"> （个）
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>最大订单购买种类：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="限制订单产品数量（上限）" name="productclassnum" class="input-text" value="{$web_config['productclassnum']}"> （种）
+					</div>
+				</div>
+                <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>点货期限（国内）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" placeholder="限制发货人点货时间（小时）" name="domesticterm" class="input-text" value="{$web_config['domesticterm']}"> （小时）
+					</div>
+				</div>
+                 <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>点货期限（国外）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text" placeholder="限制发货人点货时间（小时）" name="abroadterm" class="input-text" value="{$web_config['abroadterm']}"> （小时）
+					</div>
+				</div>
+                <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>运输费（国内）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="运输费" name="domesticfreight" class="input-text" value="{$web_config['domesticfreight']}"> （人民币￥）
+					</div>
+				</div>
+                 <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>运输费（国外）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="运输费" name="abroadfreight" class="input-text" value="{$web_config['abroadfreight']}"> （人民币￥）
+					</div>
+				</div>
+                <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>支付时间（国内）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="接单者上传商品信息后，下单人付款的时间" name="paytime1" class="input-text" value="{$web_config['paytime1']}"> （小时）
+					</div>
+				</div>
+                 <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>支付时间（国外）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="接单者上传商品信息后，下单人付款的时间" name="paytime2" class="input-text" value="{$web_config['paytime2']}"> （小时） 
+					</div>
+				</div>
+                <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>发货延期（国内）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="发货延期最长时间" name="pcost1" class="input-text" value="{$web_config['pcost1']}"> （小时） 
+					</div>
+				</div>
+                <div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>发货延期（国外）：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="发货延期最长时间" name="pcost0" class="input-text" value="{$web_config['pcost0']}"> （小时） 
+					</div>
+				</div>
+			</div>
+			<div class="tabCon">
+					<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>佣金：</label>
+					<div class="formControls col-xs-8 col-sm-9">
+						<input type="text"  placeholder="收取佣金比例" name="commission" class="input-text" value="{$web_config['commission']}"> % (0-1之间)
+					</div>
+				</div>
+					
+			</div>
+			<div class="tabCon">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>商品黑名单：<br/>（以|隔开）</label>
+					<div class="formControls col-xs-8 col-sm-9">
+                    <textarea name="banword" class="textarea" style="height:300px;">{$web_config['banword']}</textarea> 
+					
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/laypage/1.2/laypage.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$.Huitab("#tab-system .tabBar span","#tab-system .tabCon","current","click","0");
+});
+
+$(function(){
+	var index = parent.layer.getFrameIndex(window.name);
+	if($('#close').html()==1){
+		layer.msg('操作成功',{icon:1,time:2000});
+		setTimeout("window.location.replace(location.href)",2000);
+	}else if($('#close').html()==2){
+		layer.msg('操作失败',{icon:1,time:2000});
+		}
+});
+
+</script>
+ 
+</body>
+</html>

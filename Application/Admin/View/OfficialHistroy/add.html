@@ -1,0 +1,198 @@
+
+<include file="Public:header" />
+
+<body>
+
+<div class="pd-20">
+	<form  method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data" action="{:U('OfficialHistroy/addpost')}">
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>事件时间：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" id="datemax" class="input-text Wdate" name="dotime" style="width:50%" datatype="*" nullmsg="请输入开始日期！">
+                 <span class="Validform_checktip"></span>
+			</div>
+		</div>
+        
+         <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>内容：</label>
+			<div class="formControls col-8"> 
+            <textarea name="official_histroy_content"  class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-200" dragonfly="true" nullmsg="内容不能为空！" onKeyUp="textarealength(this,200)"></textarea>
+            <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+
+        
+          <div class="row cl">
+              <label class="form-label col-2"><span class="c-red">*</span>类型：</label>
+              <div class="formControls col-2"> 
+                    <span class="select-box">
+                        <select name="type" class="select">
+                            <option value="1">图片</option>
+                            <option value="2">视频</option>
+                            <option value="3">音频</option>
+                        </select>
+                    </span>
+        	  </div>
+        </div> 
+        
+        <div id="imgbox">
+         <div class="row cl">
+              <label class="form-label col-2"><span class="c-red">*</span>图片：</label>
+             <div class="formControls col-6">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="imgfiles[]">
+                   <span class="Validform_checktip">最多6张</span>
+                </span>
+			</div>
+            
+        </div>   
+         <div class="row cl">
+              <label class="form-label col-2"></label>
+             <div class="formControls col-6">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="imgfiles[]">
+                </span>
+			</div>
+            
+        </div>   
+         <div class="row cl">
+              <label class="form-label col-2"></label>
+             <div class="formControls col-6">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="imgfiles[]">
+                </span>
+			</div>
+            
+        </div>   
+         <div class="row cl">
+              <label class="form-label col-2"></label>
+             <div class="formControls col-6">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="imgfiles[]">
+                  
+                </span>
+			</div>
+            
+        </div>   
+         <div class="row cl">
+              <label class="form-label col-2"></label>
+             <div class="formControls col-6">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="imgfiles[]">
+                </span>
+			</div>
+            
+        </div>   
+         <div class="row cl">
+              <label class="form-label col-2"></label>
+             <div class="formControls col-6">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="imgfiles[]">
+                </span>
+			</div>
+            
+        </div>   
+        </div>
+         
+         <div id="vediobox" style="display:none;">
+              <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>音频文件：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <span class="btn-upload form-group">
+                      <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                      <input type="file" multiple class="input-file" name="yinpin">
+                    </span>
+                </div>
+            </div>
+         </div>
+         
+          <div id="shipinbox" style="display:none;">
+              <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>预览图：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <span class="btn-upload form-group">
+                      <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                      <input type="file" multiple class="input-file" name="vedioimages">
+                    </span>
+                </div>
+            </div>
+              <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>视频文件：</label>
+                <div class="formControls col-xs-8 col-sm-9">
+                    <span class="btn-upload form-group">
+                      <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                      <input type="file" multiple class="input-file" name="shipin">
+                    </span>
+                </div>
+            </div>
+         </div>
+       
+		<div class="row cl">
+			<div class="col-10 col-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确定</button>
+				
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/Validform/5.3.2/Validform.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript">
+$(function(){
+$("#form-article-add").Validform(
+{
+	tiptype:3, 
+	});
+});
+	
+
+$(function(){
+	if($('#kk').html()==1){
+		layer.msg("添加成功！",{icon:1,time:2000});
+		setTimeout("window.parent.location.reload()",2000);
+		}else if($('#kk').html()==2){
+			layer.msg("添加失败！",{icon:2,time:2000});
+			setTimeout("window.parent.location.reload()",2000);	
+			}
+	});
+
+$(function(){
+	$("select[name=type]").change(function(){
+		$nowval=$(this).val();
+		if($nowval==1){
+			$("#vediobox").hide();
+			$("#shipinbox").hide();
+			$("#imgbox").show();
+			}else if($nowval==3){
+				$("#vediobox").show();
+				$("#shipinbox").hide();
+				$("#imgbox").hide();
+				}else{
+					$("#shipinbox").show();
+					$("#vediobox").hide();
+					$("#imgbox").hide();
+					}
+		
+		});
+	if($('#kk').html()==1){
+		layer.msg("添加成功！",{icon:1,time:2000});
+		setTimeout("window.parent.location.reload()",2000);
+		}else if($('#kk').html()==2){
+			layer.msg("添加失败！",{icon:2,time:2000});
+			setTimeout("window.parent.location.reload()",2000);	
+			}
+	});
+</script>
+</body>
+</html>

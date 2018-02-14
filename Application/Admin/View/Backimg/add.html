@@ -1,0 +1,55 @@
+
+<include file="Public:header" />
+
+<body>
+<article class="page-container">
+	<form class="form form-horizontal" id="form-article-add" action="{:U('Backimg/addpost')}" enctype="multipart/form-data" method="post">
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>背景图：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="images" required>（740*360）
+                </span>
+			</div>
+		</div>
+		
+		<div class="row cl">
+			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
+				
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</article>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/icheck/jquery.icheck.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+
+
+<script type="text/javascript">
+$(function(){
+	$('.skin-minimal input').iCheck({
+		checkboxClass: 'icheckbox-blue',
+		radioClass: 'iradio-blue',
+		increaseArea: '20%'
+	});
+
+	if($('#kk').html()==1){
+		layer.msg("添加成功！",{icon:1,time:2000});
+		setTimeout("window.parent.location.reload()",2000);
+		}else if($('#kk').html()==2){
+		layer.msg("添加失败！",{icon:2,time:2000});	
+			}
+	});
+</script>
+</body>
+
+</html>

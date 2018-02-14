@@ -1,0 +1,41 @@
+<include file="Public:header" />
+<body>
+<div class="pd-20">
+    <table class="table">
+        <tbody>
+        <tr>
+            <th class="text-r">商品名称：</th>
+            <td>{$info['product_name']}</td>
+        </tr>
+        <tr>
+            <th class="text-r">商品封面图片：</th>
+            <td><img src="__ROOT__{$info['product_img']}" width="100" ></td>
+        </tr>
+         <tr>
+            <th class="text-r">商品简介：</th>
+            <td>{$info['summary']}</td>
+        </tr>
+        <tr>
+            <th class="text-r" width="160">上架时间：</th>
+            <td>{$info['addtime']|date='Y-m-d H:s',###}</td>
+        </tr>
+        <tr>
+            <th class="text-r">状态：</th>
+            <td><if condition="$info['status'] eq 1">上架中<else />已下架</if></td>
+        </tr>
+        <tr>
+            <th class="text-r">是否首页推荐：</th>
+            <td><if condition="$info['hotstatus'] eq 1">热门<else />非热门</if></td>
+        </tr>
+        <tr>
+            <th class="text-r">商品内容：</th>
+            <td>{$info['product_content']}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+</body>
+</html>

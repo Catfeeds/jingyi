@@ -1,0 +1,56 @@
+<include file="Public:header" />
+
+<body>
+<div class="page-container">
+        <form action="{:U('StarSign/editpost')}" method="post" class="form form-horizontal" id="form-user-add" >
+          <input name="id" type="hidden" value="{$res['star_id']}">
+
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>名称：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" class="input-text"  name="name" required value="{$res['name']}"> 
+			</div>
+		</div>
+        <div class="row cl">
+            <div class="col-9 col-offset-2">
+                <input class="btn btn-primary radius" type="submit" id="category-edit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/icheck/jquery.icheck.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery.validation/1.14.0/messages_zh.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+    });
+
+$(function(){
+	if($('#kk').html()==1){
+		layer.msg("修改成功！",{icon:1,time:2000});
+		setTimeout("window.parent.location.reload()",1000);
+		}else if($('#kk').html()==2){
+		layer.msg("修改失败！",{icon:2,time:2000});	
+		setTimeout("window.parent.location.reload()",1000);
+			}
+	});
+
+</script>
+</body>
+</html>

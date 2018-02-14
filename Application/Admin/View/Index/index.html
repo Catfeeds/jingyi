@@ -1,0 +1,503 @@
+<include file="Public:header"/>
+
+<body>
+<header class="Hui-header cl"><a class="Hui-logo l" title="H-ui.admin v2.3" href="/">{:C("systemname")}后台管理</a> <a
+        class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
+    <ul class="Hui-userbar">
+        <li>{:session("admin_key_name")}</li>
+        <li class="dropDown dropDown_hover"><a class="dropDown_A">{:session("admin_key_loginname")} <i
+                class="Hui-iconfont">&#xe6d5;</i></a>
+            <ul class="dropDown-menu radius box-shadow menu">
+                <li><a href="{:U('Login/loginout')}">退出</a></li>
+            </ul>
+        </li>
+        <li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i
+                class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+            <ul class="dropDown-menu radius box-shadow">
+                <li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+                <li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+                <li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+                <li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+                <li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+                <li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
+            </ul>
+        </li>
+    </ul>
+    <a href="javascript:;" class="Hui-nav-toggle Hui-iconfont" aria-hidden="false">&#xe667;</a></header>
+<aside class="Hui-aside">
+    <input runat="server" id="divScrollValue" type="hidden" value=""/>
+    <div class="menu_dropdown bk_2">
+        <dl id="menu-system">
+            <dt><i class="Hui-iconfont">&#xe62e;</i> 账号管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+            <dd>
+                <ul>
+                    <li><a _href="{:U('Password/editpassword')}" data-title="修改密码" href="javascript:void(0)">修改密码</a>
+                    </li>
+                </ul>
+            </dd>
+        </dl>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('2',session('admin_key_auth')))">
+            <dl id="menu-article">
+                <dt><i class="Hui-iconfont">&#xe685;</i> banner管理<i
+                        class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Banner/index')}" data-title="banner管理" href="javascript:void(0)">banner列表</a>
+                        </li>
+                        <!--<li><a _href="{:U('Banner/add')}" data-title="banner添加" href="javascript:void(0)">banner添加</a>-->
+                        <!--</li>-->
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('3',session('admin_key_auth')))">
+            <dl id="menu-article">
+                <dt><i class="Hui-iconfont">&#xe685;</i> 引导图管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Yindao/index')}" data-title="引导图管理" href="javascript:void(0)">引导图列表</a></li>
+                        <li><a _href="{:U('Yindao/add')}" data-title="引导图添加" href="javascript:void(0)">引导图添加</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('4',session('admin_key_auth')))">
+            <dl id="menu-article">
+                <dt><i class="Hui-iconfont">&#xe685;</i> 启动页管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Qidong/index')}" data-title="启动页管理" href="javascript:void(0)">启动页列表</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('5',session('admin_key_auth')))">
+            <dl id="menu-article">
+                <dt><i class="Hui-iconfont">&#xe685;</i> 星球音乐库管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Music/index')}" data-title="星球音乐列表" href="javascript:void(0)">星球音乐列表</a></li>
+                        <li><a _href="{:U('Music/add')}" data-title="音乐添加" href="javascript:void(0)">音乐添加</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('6',session('admin_key_auth')))">
+            <dl id="menu-article">
+                <dt><i class="Hui-iconfont">&#xe616;</i> 文章管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <!-- <li><a _href="{:U('Article/about',array('id'=>1))}" data-title="注册协议" href="javascript:void(0)">注册协议</a></li> -->
+                        <li><a _href="{:U('Article/about',array('id'=>2))}" data-title="关于我们" href="javascript:void(0)">关于我们</a>
+                        </li>
+                        <li><a _href="{:U('Article/about',array('id'=>3))}" data-title="联系客服" href="javascript:void(0)">联系客服</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('7',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe62d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('User/index')}" data-title="用户管理" href="javascript:void(0)">用户管理</a></li>
+                        <li><a _href="{:U('User/add')}" data-title="用户添加" href="javascript:void(0)">用户添加</a></li>
+                        <li><a _href="{:U('User/black_list')}" data-title="黑名单列表" href="javascript:void(0)">黑名单列表</a></li>
+                        <li><a _href="{:U('User/apply')}" data-title="用户申请" href="javascript:void(0)">用户申请</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('8',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe620;</i> 商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Product/index')}" data-title="商品管理" href="javascript:void(0)">商品管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('9',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe616;</i> 贴子管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Activity/index',array('type'=>1))}" data-title="官方活动贴管理"
+                               href="javascript:void(0)">官方活动贴管理</a></li>
+                        <li><a _href="{:U('Official/index')}" data-title="官方贴管理" href="javascript:void(0)">官方贴管理</a>
+                        </li>
+                        <li><a _href="{:U('OfficialHistroy/index')}" data-title="编年史管理"
+                               href="javascript:void(0)">编年史管理</a></li>
+
+                        <li><a _href="{:U('Activity/index',array('type'=>2))}" data-title="群活动贴管理"
+                               href="javascript:void(0)">群活动贴管理</a></li>
+                        <li><a _href="{:U('Posts/index')}" data-title="星球帖管理"
+                               href="javascript:void(0)">星球帖管理</a></li>
+                        <li><a _href="{:U('GroupModelArticle/index')}" data-title="CLUB文章管理"
+                               href="javascript:void(0)">CLUB文章管理</a></li>
+                        <li><a _href="{:U('GroupModelArticle/union_index')}" data-title="星系联盟文章管理"
+                               href="javascript:void(0)">星系联盟文章管理</a></li>
+                        <li><a _href="{:U('GroupModelArticle/forum_index')}" data-title="论坛文章管理"
+                               href="javascript:void(0)">论坛文章管理</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('10',session('admin_key_auth')))">
+            <dl id="menu-article">
+                <dt><i class="Hui-iconfont">&#xe63c;</i>订单管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Order/lst')}" data-title="订单管理" href="javascript:void(0)">订单列表</a></li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('11',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe68a;</i> 留言管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Leavemsg/index')}" data-title="意见反馈" href="javascript:void(0)">意见反馈</a></li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('12',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 举报管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Report/index')}" data-title="举报管理" href="javascript:void(0)">举报管理</a></li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('13',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 系统消息管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Message/index')}" data-title="系统消息管理" href="javascript:void(0)">系统消息管理</a>
+                        </li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('14',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 提现申请<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Withdrawal/index')}" data-title="提现申请" href="javascript:void(0)">提现申请</a>
+                        </li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('15',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 用户问答管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Question/index')}" data-title="用户问答管理" href="javascript:void(0)">用户问答管理</a>
+                        </li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+        <if condition="(session('admin_key_id') eq 1) or (in_array('16',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 统计管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Mycount/mycount')}" data-title="统计管理" href="javascript:void(0)">统计管理</a></li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('17',session('admin_key_auth')))">
+            <dl id="menu-system">
+                <dt><i class="Hui-iconfont">&#xe62e;</i> 系统设定<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Hobby/index')}" data-title="爱好选项设定" href="javascript:void(0)">爱好选项设定</a></li>
+                        <li><a _href="{:U('ProfessionSign/index')}" data-title="职业选项设定"
+                               href="javascript:void(0)">职业选项设定</a></li>
+                        <li><a _href="{:U('StarSign/index')}" data-title="星球标签设定" href="javascript:void(0)">星球标签设定</a>
+                        </li>
+                        <li><a _href="{:U('Backimg/index')}" data-title="星球背景设定" href="javascript:void(0)">星球背景设定</a>
+                        </li>
+                        <li><a _href="{:U('City/indexcountry')}" data-title="国家列表" href="javascript:void(0)">国家列表</a>
+                        </li>
+                        <li><a _href="{:U('City/indexprovince')}" data-title="省份列表" href="javascript:void(0)">省份列表</a>
+                        </li>
+                        <li><a _href="{:U('City/index')}" data-title="城市列表" href="javascript:void(0)">城市列表</a></li>
+                        <li><a _href="{:U('City/indexcounty')}" data-title="区县列表" href="javascript:void(0)">区县列表</a>
+                        </li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('18',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Admin/index')}" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('19',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 敏感词管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li><a _href="{:U('Shielding/index')}" data-title="敏感词列表" href="javascript:void(0)">敏感词列表</a></li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('20',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 首页功能模块管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a _href="{:U('GroupModel/index')}" data-title="首页功能模块列表" href="javascript:void(0)">首页功能模块列表</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+        <if condition="(session('admin_key_id') eq 1) or (in_array('21',session('admin_key_auth')))">
+            <dl id="menu-admin">
+                <dt><i class="Hui-iconfont">&#xe70c;</i> 官网首页管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>
+                </dt>
+                <dd>
+                    <ul>
+                        <li>
+                            <a _href="{:U('Home/index')}" data-title="首页列表" href="javascript:void(0)">首页列表</a>
+                        </li>
+                    </ul>
+                </dd>
+            </dl>
+        </if>
+
+
+        <!------
+                <if condition="(session('admin_key_id') eq 1) or (in_array('1',session('admin_key_auth')))">
+                    <dl id="menu-article">
+                        <dt><i class="Hui-iconfont">&#xe63c;</i>商品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('Product/index')}" data-title="商品列表" href="javascript:void(0)">商品列表</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+
+                <if condition="(session('admin_key_id') eq 1) or (in_array('4',session('admin_key_auth')))">
+                    <dl id="menu-article">
+                        <dt><i class="Hui-iconfont">&#xe63c;</i>商品分类管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('Category/index')}" data-title="分类列表" href="javascript:void(0)">商品分类列表</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+
+                <if condition="(session('admin_key_id') eq 1) or (in_array('4',session('admin_key_auth')))">
+                    <dl id="menu-article">
+                        <dt><i class="Hui-iconfont">&#xe63c;</i>运费设置<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('Freight/index')}" data-title="运费规格列表" href="javascript:void(0)">运费规格列表</a></li>
+                                <li><a _href="{:U('Freight/add')}" data-title="设置运费" href="javascript:void(0)">设置运费</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+
+                <if condition="(session('admin_key_id') eq 1) or (in_array('5',session('admin_key_auth')))">
+                    <dl id="menu-admin">
+                        <dt><i class="Hui-iconfont">&#xe62d;</i> 商铺审核管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('BusinessReply/index')}" data-title="商铺审核管理" href="javascript:void(0)">商铺审核</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+
+                <if condition="(session('admin_key_id') eq 1) or (in_array('5',session('admin_key_auth')))">
+                    <dl id="menu-admin">
+                        <dt><i class="Hui-iconfont">&#xe62d;</i> 用户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('User/index')}" data-title="用户管理" href="javascript:void(0)">用户管理</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+
+                <if condition="(session('admin_key_id') eq 1) or (in_array('5',session('admin_key_auth')))">
+                    <dl id="menu-admin">
+                        <dt><i class="Hui-iconfont">&#xe62d;</i> 商户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('Business/index')}" data-title="商户列表" href="javascript:void(0)">商户列表</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+                <if condition="(session('admin_key_id') eq 1) or (in_array('6',session('admin_key_auth')))">
+                    <dl id="menu-admin">
+                        <dt><i class="Hui-iconfont">&#xe63b;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('Count/members')}" data-title="会员卡统计" href="javascript:void(0)">会员卡统计</a></li>
+                                <li><a _href="{:U('Count/orders')}" data-title="订单统计" href="javascript:void(0)">订单统计</a></li>
+                                <li><a _href="{:U('Count/business')}" data-title="商铺订单分成统计" href="javascript:void(0)">商铺订单分成统计</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+                <if condition="(session('admin_key_id') eq 1) or (in_array('6',session('admin_key_auth')))">
+                    <dl id="menu-admin">
+                        <dt><i class="Hui-iconfont">&#xe63b;</i>提现申请管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('Withdrawal/index')}" data-title="提现申请" href="javascript:void(0)">提现申请</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+
+
+                <if condition="(session('admin_key_id') eq 1) or (in_array('7',session('admin_key_auth')))">
+                    <dl id="menu-system">
+                        <dt><i class="Hui-iconfont">&#xe62e;</i> 系统设定<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+                        <dd>
+                            <ul>
+                                <li><a _href="{:U('Setoutlay/update')}" data-title="平台参数设置" href="javascript:void(0)">平台参数设置</a></li>
+                                <li><a _href="{:U('Setoutlay/scale_set')}" data-title="订单分成比例设置" href="javascript:void(0)">订单分成比例设置</a></li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </if>
+        --->
+
+    </div>
+</aside>
+<div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<section class="Hui-article-box">
+    <div id="Hui-tabNav" class="Hui-tabNav">
+        <div class="Hui-tabNav-wp">
+            <ul id="min_title_list" class="acrossTab cl">
+                <li class="active"><span title="我的桌面" data-href="{:U('Index/welcome')}">我的桌面</span><em></em></li>
+            </ul>
+        </div>
+        <div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S"
+                                                  href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a
+                id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a>
+        </div>
+    </div>
+    <div id="iframe_box" class="Hui-article">
+        <div class="show_iframe">
+            <div style="display:none" class="loading"></div>
+            <iframe scrolling="yes" frameborder="0" src="{:U('Index/welcome')}"></iframe>
+        </div>
+    </div>
+</section>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript">
+    /*资讯-添加*/
+    function article_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+    /*图片-添加*/
+    function picture_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+    /*产品-添加*/
+    function product_add(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+    /*用户-添加*/
+    function member_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+</script>
+<script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s)
+    })();
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</body>
+</html>

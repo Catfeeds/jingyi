@@ -1,0 +1,173 @@
+<include file="Public:header"/>
+<body>
+<?php $rootPath = C('HOST');?>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<form action="{:U('Order/lst')}" method="get" style="margin-top: 20px;">
+    <div class="text-c">
+        日期范围：
+        <input type="text" onFocus="WdatePicker()" id="logmin" class="input-text Wdate" style="width:120px;"
+               name="begintime" value="{$begin}">
+        -
+        <input type="text" onFocus="WdatePicker()" id="logmax" class="input-text Wdate" style="width:120px;"
+               name="endtime" value="{$end}">
+        <!--<input type="text" name="subcode" placeholder=" 订单号" style="width:250px" class="input-text">-->
+        <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    </div>
+</form>
+
+
+<div class="cl pd-5 bg-1 bk-gray mt-20">
+    <span class="l" style="margin-left: 30px;"><a class="btn  <if condition='!$status'>btn-success <else/>btn-primary</if>  radius" href="{:U('Order/lst')}">全部</a></span>
+    <span class="l" style="margin-left: 30px;"><a class="btn <if condition='$status eq 2'>btn-success <else/>btn-primary</if> radius"
+                                                  href="{:U('Order/lst',array('status'=>2))}">待发货</a></span>
+    <span class="l" style="margin-left: 30px;"><a class="btn <if condition='$status eq 3'>btn-success <else/>btn-primary</if> radius"
+                                                  href="{:U('Order/lst',array('status'=>3))}">收货中</a></span>
+    <span class="l" style="margin-left: 30px;"><a class="btn <if condition='$status eq 4'>btn-success <else/>btn-primary</if> radius"
+                                                  href="{:U('Order/lst',array('status'=>4))}">已收货</a></span>
+    <span class="l" style="margin-left: 30px;"><a class="btn <if condition='$status eq 5'>btn-success <else/>btn-primary</if> radius"
+                                                  href="{:U('Order/lst',array('status'=>5))}">已评价</a></span>
+    <span class="l" style="margin-left: 30px;"><a class="btn <if condition='$status eq 6'>btn-success <else/>btn-primary</if> radius"
+                                                  href="{:U('Order/lst',array('status'=>6))}">退款中</a></span>
+    <span class="l" style="margin-left: 30px;"><a class="btn <if condition='$status eq 7'>btn-success <else/>btn-primary</if> radius"
+                                                  href="{:U('Order/lst',array('status'=>7))}">已退款</a></span>
+</div>
+
+<div class="page-container pd-20">
+
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="25">ID</th>
+                <th width="80">订单号</th>
+                <th width="70">下单者</th>
+                <th width="70">订单总价</th>
+                <th width="70">下单时间</th>
+                <th width="70">状态</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="v">
+                <tr class="text-c">
+                    <td>{$v["id"]}</td>
+                    <td>{$v["subcode"]}</td>
+                    <td>{$v["tel"]}</td>
+                    <td>￥{$v["allpricemsg"]["allprice"]}</td>
+                    <td>{$v.addtime|date="Y-m-d H:i:s",###}</td>
+                    <td class="td-status">
+                        <if condition="$v['status'] eq 0"><span class="label label-success radius">待支付</span></if>
+                        <if condition="$v['status'] eq 1"><span class="label label-success radius">取消订单</span></if>
+                        <if condition="$v['status'] eq 2"><span class="label label-success radius">待发货</span></if>
+                        <if condition="$v['status'] eq 3"><span class="label label-success radius">收货中</span></if>
+                        <if condition="$v['status'] eq 4"><span class="label label-success radius">已收货</span></if>
+                        <if condition="$v['status'] eq 5"><span class="label label-success radius">已评价</span></if>
+                        <if condition="$v['status'] eq 6"><span class="label label-warning radius">退款中</span></if>
+                        <if condition="$v['status'] eq 7"><span class="label label-danger radius">已退款</span></if>
+                    </td>
+
+                    <td class="td-manage" style="font-size:14px">
+                        <if condition="$v['status'] eq 2">
+
+                            <a href="javascript:;" class="tablelink"
+                               onClick="fullp('发货','__MODULE__/Order/add',{$v.id})">发货</a>&nbsp;&nbsp;
+                        </if>
+                        <a href="javascript:;" class="tablelink"
+                           onClick="fullp('订单详情','__MODULE__/Order/detail',{$v.subcode},900,500)">订单详情</a>&nbsp;&nbsp;
+                        <!--<a href="{:U('Order/dum_detail',array('subcode'=>$v['subcode']))}" class="dum" about="{$v.subcode}">导出订单详情</a>-->
+                        <if condition="$v['status'] eq 6">
+                            <a href="javascript:;" class="tablelink" onClick="order_refund(this,'{$v.id}')">退款</a>&nbsp;&nbsp;
+                        </if>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/My97DatePicker/WdatePicker.js"></script>
+
+<script type="text/javascript" src="__ROOT__/Public/js/common.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $('.table-sort').dataTable({
+            "aaSorting": [[1, "desc"]], //默认第几个排序
+            "bStateSave": true, //状态保存
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {"orderable": false, "aTargets": [0, 4]}// 制定列不参与排序
+            ]
+        });
+        $('.table-sort tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+//                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    });
+    /*用户-查看*/
+    function member_show(title, url, id, w, h) {
+        var url = url + '/id/' + id;
+        layer_show(title, url, w, h);
+    }
+
+    function fullp(title, url, id) {
+        var url = url + '/id/' + id;
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+
+    //处理退款
+    function order_refund(obj, id) {
+        layer.confirm('确认要退款吗？', {btn: ['退款', '拒绝']}
+            , function (index) {
+            $.ajax({
+                url: "{:U('Order/refund')}",
+                type: 'post',
+                dataType: 'json',
+                data: {'id': id},
+                success: function (Msg) {
+                    if (Msg) {
+                        layer.msg('退款成功!', {icon: 1, time: 1000});
+                        location.reload();
+                    } else {
+                        layer.msg('退款失败!', {icon: 2, time: 1000});
+                        location.reload();
+                    }
+                }
+            });
+        }, function (index) {
+            $.ajax({
+                url: "{:U('Order/no_refund')}",
+                type: 'post',
+                dataType: 'json',
+                data: {'id': id},
+                success: function (Msg) {
+                    if (Msg) {
+                        layer.msg('已拒绝退款!', {icon: 2, time: 1000});
+                        location.reload();
+                    }
+                }
+            })
+        });
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<include file="Public:header" />
+<body>
+<div class="cl pd-20" style=" background-color:#5bacb6">
+    <!--<img class="avatar size-XL l" src="__ROOT__/{$info['headimg']}">-->
+    <dl style="margin-left:80px; color:#fff">
+        <dt><span class="f-18">流水信息</span> </dt>
+        <dd class="pt-10 f-12" style="margin-left:0"><span class="pl-10 f-12">账号：{$userinfo["tel"]}</span></dd>
+    </dl>
+</div>
+<div class="pd-20">
+
+<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="130">注册时间</th>
+				<th width="70">流水类型</th>
+				<th width="130">钱数</th>
+			</tr>
+		</thead>
+		<tbody>
+        <volist name="list" id="vo">
+			<tr class="text-c">
+				<td>{:date("Y-m-d H:i:s",$vo["addtime"])}</td>
+				<td>
+                <if condition="$vo['type'] eq 1"> 会员卡分成
+                <elseif condition="$vo['type'] eq 2"/>购买商品花费
+                <elseif condition="$vo['type'] eq 3"/>提现
+                <elseif condition="$vo['type'] eq 4"/>用户转账
+                <elseif condition="$vo['type'] eq 5"/>购买商品分成
+                <else />购买商品返利
+                </if>
+                </td>
+				<td>{$vo["moneynum"]}</td>
+				
+			</tr>
+            </volist>
+		</tbody>
+	</table>
+  
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+</body>
+</html>

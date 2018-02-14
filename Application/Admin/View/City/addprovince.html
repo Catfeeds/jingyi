@@ -1,0 +1,69 @@
+
+<include file="Public:header" />
+
+<body>
+
+<div class="pd-20">
+	<form  method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data" action="{:U('City/addprovincepost')}">
+      <div class="row cl">
+              <label class="form-label col-2"><span class="c-red">*</span>所属国家：</label>
+              <div class="formControls col-2"> 
+                    <span class="select-box">
+                        <select name="country_id" class="select" required>
+                            <option value="">请选择</option>
+                            <volist name="countrylist" id="vo">
+                            <option value="{$vo.country_id}">{$vo.country}</option>
+                            </volist>
+                        </select>
+                    </span>
+        	  </div>
+        </div> 
+
+
+
+         <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>省份名称：</label>
+			<div class="formControls col-8"> 
+				<input type="text" class="input-text" value="" name="province"  datatype="s1-30" nullmsg="请输入省份名称！" errormsg="最多30字！" style="width:50%">
+                <span class="Validform_checktip"></span>
+			</div>
+		</div>
+       
+		<div class="row cl">
+			<div class="col-10 col-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确定</button>
+				
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/Validform/5.3.2/Validform.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript">
+$(function(){
+$("#form-article-add").Validform(
+{
+	tiptype:3, 
+	});
+});
+	
+
+$(function(){
+	if($('#kk').html()==1){
+		layer.msg("添加成功！",{icon:1,time:2000});
+		setTimeout("window.parent.location.reload()",2000);
+		}else if($('#kk').html()==2){
+			layer.msg("添加失败！",{icon:2,time:2000});
+			setTimeout("window.parent.location.reload()",2000);	
+			}
+	});
+
+
+</script>
+</body>
+</html>

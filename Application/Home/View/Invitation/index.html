@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="__PUBLIC__/Home/css/common.css">
+    <script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="__ROOT__/Public/Admin/lib/Validform/5.3.2/Validform.min.js"></script>
+    <title>问卷调查</title>
+</head>
+<body>
+<form method="post" id="form-article-add" action="{:U('Invitation/addpost')}">
+    <div class="gl-title">问卷调查</div>
+
+    <ul class="gl-con gl-con-pc">
+        <li>
+            <p class="gl-top">手机号：</p>
+            <input type="text" placeholder="请输入您的手机号" class="gl-input" name="tel" datatype="m" errormsg="手机号码不正确！"/>
+            <span class="Validform_checktip"></span></li>
+        <volist name="question" id="vo">
+            <li>
+                <p class="gl-top">{$vo.name}</p>
+                <input type="text" placeholder="请输入你的内容" class="gl-input" name="{$vo.question_id}" datatype="*1-250"
+                       errormsg="最多250字！"/>
+                <span class="Validform_checktip"></span></li>
+            <li>
+        </volist>
+    </ul>
+    <div class="gl-btn">提 交</div>
+</form>
+<script type="text/javascript">
+    $(function () {
+        $("#form-article-add").Validform({
+            tiptype: 3,
+        });
+        $(".gl-btn").click(function () {
+            $("#form-article-add").submit();
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<include file="Public:header"/>
+
+<body>
+<div class="cl pd-20" style=" background-color:#5bacb6">
+    <!--<img class="avatar size-XL l" src="__ROOT__/{$info['headimg']}">-->
+    <dl style="margin-left:80px; color:#fff">
+        <dt><span class="f-18">问卷详情</span></dt>
+
+    </dl>
+</div>
+<div class="pd-20">
+
+    <table class="table table-border table-bordered table-hover table-bg table-sort">
+        <thead>
+        <tr class="text-c">
+            <th width="130">问题</th>
+            <th width="70">回答</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="question" id="vo">
+            <tr class="text-c">
+                <td>{$vo.name}</td>
+                <td>{$vo.answer}</td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+    <br/>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+
+</body>
+</html>

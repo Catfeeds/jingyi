@@ -1,0 +1,50 @@
+﻿<include file="Public:header" />
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 消息管理 <span class="c-gray en">&gt;</span> 系统消息 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container pd-20">
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+                <th width="40">1</th>
+                <th width="200">版本更新消息</th>
+				<th width="40"><a style="text-decoration:none" onClick="member_send(this,1)" href="javascript:;" title="发送">发送</a> </th>
+			</tr>
+		</thead>
+	</table>
+	</div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+
+
+/*用户-启用*/
+function member_send(obj,id){
+	layer.confirm('确认发送此消息吗？',function(index){
+		
+		$.ajax({
+			url:"{:U('Message/add_all')}",
+			dataType:'json',
+			type:'post',
+			data:{'id':id},
+			success:function(Msg){
+				if(Msg){
+					layer.msg('已发送！',{icon: 6,time:1000});
+				}else{
+					layer.msg('操作失败！请重试....',{icon: 6,time:1000});
+				}
+			}
+		});		
+		
+	});
+}
+
+
+
+</script> 
+</body>
+</html>

@@ -1,0 +1,230 @@
+<include file="Public:header"/>
+
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span
+        class="c-gray en">&gt;</span> 用户添加 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="pd-20">
+    <form method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data"
+          action="{:U('User/addpost')}">
+        <input type="hidden" name="userid" value="{$userid}">
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>手机区号：</label>
+            <div class="formControls col-2">
+                    <span class="select-box">
+                        <select name="countrynum" class="select">
+                        <volist name="countrylist" id="vo">
+                            <option value="{$vo['code']}">{$vo['country']}（{$vo['code']}）</option>
+                         </volist>
+                        </select>
+                    </span>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>用户手机号：</label>
+            <div class="formControls col-10">
+                <if condition="$tel">
+                    <input type="text" class="input-text" value="{$tel}" name="tel" style="width:20%;" readonly>
+                    <else/>
+                    <input type="text" class="input-text" value="" name="tel" style="width:20%;" sucmsg="用户名可用！"
+                           datatype="n" errormsg="账号必须是手机号" nullmsg="请输入手机号！" ajaxurl="{:U('User/checktel')}">
+                    <span class="Validform_checktip"></span>
+                </if>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>密码：</label>
+            <div class="formControls col-10">
+                <input type="text" class="input-text" value="123456" name="password" style="width:20%;" datatype="*5-16"
+                       errormsg="密码至少5个,最多16个！" disabled>
+
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2">真实姓名：</label>
+            <div class="formControls col-10">
+                <input type="text" class="input-text" value="" name="real_name" style="width:20%;"   placeholder="最少输入2个字符">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>性别：</label>
+            <div class="formControls col-10">
+                <div class="radio-box">
+                    <input type="radio" id="radio-1" name="sex" value="1" checked>
+                    <label for="radio-1">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" id="radio-2" name="sex" value="2">
+                    <label for="radio-2">女</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row cl">
+            <label class="form-label col-2">婚姻：</label>
+            <div class="formControls col-10">
+                <select name="marriage" class="select-box" style="width:20%;" datatype="*" nullmsg="请选择婚姻！">
+                    <option value="保密">保密</option>
+                    <option value="已婚">已婚</option>
+                    <option value="未婚">未婚</option>
+                </select>
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>年龄：</label>
+            <div class="formControls col-10">
+                <input type="text" class="input-text" value="" name="age" style="width:20%;" datatype="n1-3"
+                       errormsg="年龄为1-3位数字！">
+                <span class="Validform_checktip">岁</span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>身高：</label>
+            <div class="formControls col-10">
+                <input type="text" class="input-text" value="" name="height" style="width:20%;" datatype="n2-3"
+                       errormsg="身高为厘米！">
+                <span class="Validform_checktip">cm</span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>体重：</label>
+            <div class="formControls col-10">
+                <input type="text" class="input-text" value="" name="weight" style="width:20%;" datatype="n2-3"
+                       errormsg="体重为KG！">
+                <span class="Validform_checktip">KG</span>
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>星座：</label>
+            <div class="formControls col-10">
+                <select name="constellation" class="select-box" style="width:20%;" datatype="*" nullmsg="请选择星座！">
+                    <option value="">请选择</option>
+                    <option value="白羊座">白羊座</option>
+                    <option value="金牛座">金牛座</option>
+                    <option value="双子座">双子座</option>
+                    <option value="巨蟹座">巨蟹座</option>
+                    <option value="狮子座">狮子座</option>
+                    <option value="处女座">处女座</option>
+                    <option value="天秤座">天秤座</option>
+                    <option value="天蝎座">天蝎座</option>
+                    <option value="射手座">射手座</option>
+                    <option value="摩羯座">摩羯座</option>
+                    <option value="水瓶座">水瓶座</option>
+                    <option value="双鱼座">双鱼座</option>
+                </select>
+                <span class="Validform_checktip"></span>
+
+
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>职业：</label>
+            <div class="formControls col-10">
+                <select class="select-box" size="1" name="professionsign_id" style="width:20%;" datatype="*"
+                        nullmsg="请选择职业！">
+                    <option value="" selected>请选择</option>
+                    <volist name="profession_signlist" id="ps">
+                        <option value="{$ps['pro_id']}">{$ps["name"]}</option>
+                    </volist>
+
+                </select>
+                <span class="Validform_checktip"></span>
+
+            </div>
+
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>爱好：</label>
+            <div class="formControls col-6">
+                <volist name="hobbylist" id="vo" key="k">
+                    <input type="checkbox" id="checkbox-1" value="{$vo['hobbyid']}" name="hobbyname[]"
+                    <if condition="$k eq 1"> datatype="*" nullmsg="请选择爱好！"</if>
+                    >
+                    <label for="checkbox-1">{$vo['hobbyname']}</label>&nbsp;&nbsp;
+
+                </volist>
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <!--<div class="row cl">-->
+        <!--<label class="form-label col-2">（可选）推荐者账号：</label>-->
+        <!--<div class="formControls col-2">-->
+        <!--<input type="text" class="input-text" value="" name="ptel" placeholder="请填写推荐者账号">-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="row cl">
+            <label class="form-label col-2">（可选）推荐码：</label>
+            <div class="formControls col-10">
+                <input type="text" class="input-text" value="" name="number" style="width:20%;" sucmsg="推荐码可用！"
+                       ajaxurl="{:U('User/check_number')}">
+                <span class="Validform_checktip"></span>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-2"><span class="c-red">*</span>引荐者语：</label>
+            <div class="formControls col-8">
+                <textarea name="guide" class="textarea" placeholder="说点什么...最少输入10个字符" datatype="*10-50"
+                          dragonfly="true" nullmsg="引荐者语不能为空！" onKeyUp="textarealength(this,50)"></textarea>
+                <p class="textarea-numberbar"><em class="textarea-length">0</em>/50</p>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-10 col-offset-2">
+                <button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i
+                        class="Hui-iconfont">&#xe632;</i> 确定
+                </button>
+
+                <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#form-article-add").Validform(
+            {
+                tiptype: 3,
+            });
+    });
+
+
+    $(function () {
+        if ($('#kk').html() == 1) {
+            layer.msg("添加成功！", {icon: 1, time: 2000});
+            setTimeout("window.parent.location.reload()", 2000);
+        } else if ($('#kk').html() == 2) {
+            layer.msg("添加失败！", {icon: 2, time: 2000});
+            setTimeout("window.parent.location.reload()", 2000);
+        } else if ($('#kk').html() == 3) {
+            layer.msg("账号已存在！", {icon: 2, time: 2000});
+            setTimeout("window.parent.location.reload()", 2000);
+        } else if ($('#kk').html() == 4) {
+            layer.msg("密码必须！", {icon: 2, time: 2000});
+            setTimeout("window.parent.location.reload()", 2000);
+        }
+    });
+</script>
+</body>
+</html>

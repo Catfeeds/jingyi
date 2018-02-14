@@ -1,0 +1,95 @@
+<include file="Public:header"/>
+
+<body>
+<div class="pd-20">
+    <form  class="form form-horizontal" id="form" enctype="multipart/form-data" onsubmit="return false">
+        <input type="hidden" name="userid" value="{$userid}">
+        <div class="row cl">
+            <label class="form-label col-4"><span class="c-red">*</span>成长值加/减：</label>
+            <div class="formControls col-8">
+                <select name="type" class="select-box">
+                    <option value="">请选择</option>
+                    <option value="1">增加</option>
+                    <option value="2">减少</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-4"><span class="c-red">*</span>数值：</label>
+            <div class="formControls col-8">
+                <input type="text" class="input-text" name="value" >
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-4"><span class="c-red">*</span>内容：</label>
+            <div class="formControls col-8">
+                <textarea name="msg" style="height: 150px;width: 100%"></textarea>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-4"></label>
+            <div class="formControls col-8">
+
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-10 col-offset-2">
+                <button class="btn btn-primary radius btn-edit"><i class="Hui-iconfont">&#xe632;</i> 确定
+                </button>
+                <button onClick="removeIframe();" class="btn btn-default radius " type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/Validform/5.3.2/Validform.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript">
+
+    $('.btn-edit').click(function () {
+        console.log(123);
+        var url="{:U('User/user_wallet_water_edit')}";
+        var from_data = $('#form').serializeArray();
+        var data = [];
+        $.each(from_data,function(i){
+            data[from_data[i].name] = from_data[i].value;
+        });
+
+        data = array_to_object(data);
+        console.log(data);
+        $.ajax({
+            url:url,
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function (re) {
+                console.log(re);
+                if(re.code==200){
+                    layer.msg(re.msg, {icon: 1,time:1000});
+                    parent.location.reload();
+                }else{
+                    layer.msg(re.msg, {icon: 5,time:1000});
+                }
+
+            },
+            error:function(){
+                return msg('请求失败',201);
+            }
+        });
+    });
+    function array_to_object($arr){
+        var object = new Object();
+        for(var key in $arr){
+            object[key] = $arr[key];
+        }
+        return object;
+    }
+
+</script>
+</body>
+</html>

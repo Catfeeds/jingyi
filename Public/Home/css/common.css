@@ -1,0 +1,121 @@
+* { margin: 0; padding: 0;}
+html { font-size:62.5%;}
+body { font-family:'Microsoft YaHei', 'San-serif', 'Microsoft JhengHei', 'STXihei'; font-size: 1.4rem; color:#333; background-color: #f9f9f9;}
+html,body,div,ol,img,a,span,input,h1,h2,h3,h4,h5,h6,p{ margin:0;border:0;padding:0;font-style:normal;}
+img { display: block;}
+li { list-style: none;}
+input { outline:none;}
+textarea { outline:none;}
+.pub_Break{word-break:break-all;word-wrap:break-word;}/*强制内容换行*/
+.pub_Beyhid{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-o-text-overflow:ellipsis;}/*超出部分隐藏*/
+a { text-decoration:none;}
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table; }
+
+.clearfix:after {
+    clear: both; }
+
+.clearfix {
+    zoom: 1; }
+
+li {
+    list-style-type: none; }
+a {
+    background-color: transparent;
+    text-decoration: none;
+    cursor: pointer; }
+a:active,
+a:hover,
+a:focus {
+    outline: 0;
+    text-decoration: none; }
+
+input, textarea, select {
+    outline: 0; }
+
+img {
+    max-width: 100%;
+    font-size: 0;
+    border: none; }
+
+.fl {
+    float: left; }
+
+.fr {
+    float: right; }
+
+body {
+    background-color: #fff;
+}
+
+/*table*/
+.gl-state {
+    width: 100%;
+    height: 44px;
+}
+.gl-state .gl-left {
+    width: 44px;
+    height: 44px;
+    float: left;
+    background: url("gl_close.png") left center no-repeat;
+    background-size: cover;
+}
+.gl-state .gl-right {
+    font-size: 1.6rem;
+    float: right;
+    width: 58px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+}
+.gl-title {
+    width: 100%;
+    height: 35px;
+    background-color: #f5f5f5;
+    color: #b1b1b1;
+    font-size: 1.4rem;
+    line-height: 35px;
+    text-align: center;
+}
+.gl-con {
+    width: 92%;
+    margin: 8px auto;
+}
+.gl-con li {
+    width: 100%;
+}
+.gl-con li .gl-top {
+    width: 100%;
+    padding: 6px 0;
+    font-size: 1.5rem;
+    color: #4a4a4a;
+}
+.gl-con li .gl-input {
+    width: 100%;
+    border: none;
+    height: 30px;
+    background-color: #fff;
+    color: #4a4a4a;
+    font-size: 1.4rem;
+    font-family:'Microsoft YaHei', 'San-serif', 'Microsoft JhengHei', 'STXihei';
+}
+
+/*gl-con-pc==================================================*/
+.gl-con-pc {
+    width: 90%;
+    margin: 0 auto;
+}
+.gl-btn {
+    width: 200px;
+    height: 40px;
+    background-color: #f5f5f5;
+    color: #4a4a4a;
+    margin: 50px auto 100px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+.Validform_checktip{
+	color:#F00;
+	}

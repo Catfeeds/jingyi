@@ -1,0 +1,122 @@
+
+<include file="Public:header" />
+
+<body>
+
+<div class="pd-20">
+	<form  method="post" class="form form-horizontal" id="form-article-add" enctype="multipart/form-data" action="{:U('Activity/addpost')}">
+   
+         <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>活动名称：</label>
+			<div class="formControls col-8"> 
+				<input type="text" class="input-text" value="" name="activity_name"  datatype="*" nullmsg="请输入活动名称！" style="width:50%">
+                <span class="Validform_checktip"></span>
+			</div>
+		</div>
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>封面图：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<span class="btn-upload form-group">
+                  <input class="input-text upload-url radius" type="text" name="uploadfile-1" id="uploadfile-1" readonly><a href="javascript:void(0);" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件</a>
+                  <input type="file" multiple class="input-file" name="activity_img" required>
+                </span>
+			</div>
+		</div>
+        
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>开始日期：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'%y-%M-%d',minDate:'#F{$dp.$D(\'datemax\')}'})" id="datemin" class="input-text Wdate datemin" name="begintime" style="width:50%" datatype="*" nullmsg="请输入开始日期！">
+                 <span class="Validform_checktip"></span>
+			</div>
+		</div>
+        <div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>结束日期：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="text" onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'datemin\')}'})" id="datemax" class="input-text Wdate datemax" name="endtime" style="width:50%" datatype="*" nullmsg="请输入结束日期！">
+                 <span class="Validform_checktip"></span>
+			</div>
+		</div>
+        
+         <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>活动地址：</label>
+			<div class="formControls col-8"> 
+				<input type="text" class="input-text" value="" name="activity_address" datatype="*" nullmsg="请输入活动地址！" style="width:50%">
+                <span class="Validform_checktip"></span>
+			</div>
+		</div>
+         <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>活动联系人电话：</label>
+			<div class="formControls col-8"> 
+				<input type="text" class="input-text" value="" name="activity_contactstel" datatype="m" nullmsg="请输入活动联系人电话！"  style="width:50%">
+                <span class="Validform_checktip"></span>
+			</div>
+		</div>
+        
+        <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>活动上限人数：</label>
+			<div class="formControls col-8"> 
+				<input type="text" class="input-text" value="" name="personnum" datatype="nn" nullmsg="请输入活动上限人数！" style="width:50%" placeholder="人数不限时，填入-1" errormsg="必须为数字，可以是-1">
+                <span class="Validform_checktip"></span>
+			</div>
+		</div>
+        
+        <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>活动费用：</label>
+			<div class="formControls col-8"> 
+				<input type="text" class="input-text" value="" name="moneynum" datatype="/^-?[1-9]+(\.\d+)?$|^-?0(\.\d+)?$|^-?[1-9]+[0-9]*(\.\d+)?$/" nullmsg="请输入活动费用！" errormsg="必须为数字，可以有小数" style="width:50%" placeholder="免费时填入0">
+                <span class="Validform_checktip"></span>
+			</div>
+		</div>
+        
+         <div class="row cl">
+			<label class="form-label col-2"><span class="c-red">*</span>活动内容：</label>
+			<div class="formControls col-8"> 
+            <textarea name="activity_content"  class="textarea"  placeholder="说点什么...最少输入20个字符" datatype="*20-200" dragonfly="true" nullmsg="活动内容不能为空！" onKeyUp="textarealength(this,200)"></textarea>
+            <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+			</div>
+		</div>
+        
+         
+       
+		<div class="row cl">
+			<div class="col-10 col-offset-2">
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 确定</button>
+				
+				<button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/Validform/5.3.2/Validform.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript">
+$(function(){
+$("#form-article-add").Validform(
+{
+	tiptype:3, 
+	datatype:{
+		"nn":/^\d+$|-1/
+		}
+	});
+});
+
+
+	
+
+$(function(){
+	if($('#kk').html()==1){
+		layer.msg("添加成功！",{icon:1,time:2000});
+		setTimeout("window.parent.location.reload()",2000);
+		}else if($('#kk').html()==2){
+			layer.msg("添加失败！",{icon:2,time:2000});
+			setTimeout("window.parent.location.reload()",2000);	
+			}
+	});
+</script>
+</body>
+</html>

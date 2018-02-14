@@ -1,0 +1,67 @@
+<include file="Public:header" />
+<body>
+<if condition="empty($info)">
+   <div style="text-align:center;"> 该用户没有提交认证信息。</div>
+<else />
+<div class="pd-20">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th class="text-r" width="20%">驾驶证姓名：</th>
+        <td>{$info["drive_name"]}</td>
+      </tr>
+      <tr>
+        <th class="text-r" width="20%">驾驶证号码：</th>
+        <td>{$info["drive_number"]}</td>
+      </tr>
+      <tr>
+        <th class="text-r" width="20%">驾驶证正本图片：</th>
+        <td><img src="__ROOT__/{$info['image1']}"></td>
+      </tr>
+       <tr>
+        <th class="text-r" width="80">驾驶证副本图片：</th>
+        <td><img src="__ROOT__/{$info['image2']}"></td>
+      </tr>
+       <tr>
+        <th class="text-r">本人持驾驶证图片：</th>
+        <td><img src="__ROOT__/{$info['image3']}"></td>
+      </tr>
+    
+       <tr>
+        <th class="text-r">身份证正面图片：</th>
+        <td><img src="__ROOT__/{$info['image4']}"></td>
+      </tr>
+      <tr>
+        <th class="text-r">身份证反面图片：</th>
+        <td><img src="__ROOT__/{$info['image5']}"></td>
+      </tr>
+      
+      <tr>
+        <th class="text-r">上传时间：</th>
+        <td>{:date("Y-m-d H:i:s",$info["addtime"])}</td>
+      </tr>
+      <tr>
+        <th class="text-r">状态：</th>
+        <td>
+          <if condition="$info['status'] eq 1">
+          <span class="label label-success radius">待认证</span>
+          <elseif condition="$info['status'] eq 2" />
+          <span class="label radius">未通过</span>
+          <else />
+          <span class="label radius label-primary">已通过</span>
+          </if>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  	
+</div>
+
+</if>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+
+</body>
+</html>

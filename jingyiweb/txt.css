@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+    background: black;
+}
+
+	
+.galaxy{
+	padding:0 10%;
+	background:url(./xingxing.png);
+	
+    background-size:100%;
+	background-repeat:no-repeat;
+	background-position:center;
+	position:relative;
+	z-index:99999;
+}
+
+
+
+div[class*=track]{
+    border: 1px solid #555;
+	position: absolute;
+}
+
+.mercury-track{
+	filter:alpha(Opacity=100);-moz-opacity:1;opacity: 1;
+	}	
+.venus-track{
+	filter:alpha(Opacity=80);-moz-opacity:0.8;opacity: 0.8;
+	}
+.earth1-track{
+	filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 0.6;
+	}
+.mars-track{
+	filter:alpha(Opacity=40);-moz-opacity:0.4;opacity: 0.4;
+	}
+.jupiter-track{
+	filter:alpha(Opacity=20);-moz-opacity:0.2;opacity: 0.2;
+	}
+.mercury{
+	position: absolute;
+    width: 35px;
+    height: 35px;
+    animation: rotation 2.4s linear infinite;
+}
+
+
+.venus{
+	position: absolute;
+	width: 40px;
+    height: 40px;
+    animation: rotation 6.16s linear infinite;
+}
+
+
+.earth1{
+	position: absolute;
+    width: 35px;
+    height: 35px;
+    animation: rotation 10s linear infinite;
+ 
+}
+
+
+
+.mars{
+	position: absolute;
+    width: 40px;
+    height: 40px;
+    animation: rotation 19s linear infinite;
+
+}
+
+
+.jupiter{
+	position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: rotation 30s linear infinite;
+}
+
+
+
+@keyframes rotation{
+    to{
+        transform: rotate(360deg);
+    }
+}

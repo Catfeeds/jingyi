@@ -1,0 +1,48 @@
+<include file="Public:header"/>
+
+
+<div class="pd-20">
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th class="text-r" width="150">个人贴发帖数：</th>
+            <td>{$info["c"]}</td>
+        </tr>
+        <tr>
+            <th class="text-r">星球贴发帖数：</th>
+            <td>{$info["d"]}</td>
+        </tr>
+        <tr>
+            <th class="text-r">活动参与数：</th>
+            <td>{$info["b"]}</td>
+        </tr>
+        <tr>
+            <th class="text-r">好友数量：</th>
+            <td>{$info["f"]}</td>
+        </tr>
+        <tr>
+            <th class="text-r">粉丝数量：</th>
+            <td>{$info["g"]}</td>
+        </tr>
+        <tr>
+            <th class="text-r">订单数：</th>
+            <td>{$info["e"]}</td>
+        </tr>
+        <tr>
+            <th class="text-r">飞船发射数：</th>
+            <td>{$info["a"]}</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+    <a title="导出excel" href="{:U('user/mycount',['userid'=>$userid,'type'=>1])}"
+       class="ml-5 btn btn-success radius" style="text-decoration:none"><i class="Hui-iconfont">&#xe644;</i>
+        导出excel信息</a>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+</body>
+</html>

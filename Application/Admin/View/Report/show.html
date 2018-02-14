@@ -1,0 +1,79 @@
+<include file="Public:header"/>
+<div class="pd-20">
+    <table class="table">
+        <tbody>
+        <if condition="$info['posts_title']">
+            <tr>
+                <th class="text-r" width="80">贴子标题：</th>
+                <td>{$info['posts_title']}</td>
+            </tr>
+        </if>
+        <if condition="$info['images']">
+            <tr>
+                <th class="text-r" width="80">贴子封面图：</th>
+                <td><img src="__ROOT__/{$info['images']}" width="100"/></td>
+            </tr>
+        </if>
+
+        <tr>
+            <th class="text-r" width="80">发帖人：</th>
+            <td>{$info["usermsg"]["tel"]}({$info["usermsg"]["username"]})</td>
+        </tr>
+
+        <tr>
+            <th class="text-r" width="80">贴子类型：</th>
+            <td>
+                <if condition="$info['type'] eq 1 "> 图片
+                    <elseif condition="$info['type'] eq 2"/>
+                    视频数据
+                    <else/>
+                    音频
+                </if>
+            </td>
+        </tr>
+        <if condition="$info['post_content']">
+            <tr>
+                <th class="text-r" width="80">贴子内容：</th>
+                <td>{$info["post_content"]}</td>
+            </tr>
+        </if>
+
+        <if condition="count($info['filemsg']) neq 0">
+            <tr>
+                <th class="text-r" width="80">上传文件：</th>
+                <td>
+                    <if condition="$info['type'] eq 1 ">
+                        <volist name="info['filemsg']" id="vo">
+                            <img src="{$vo['uploadurl']}" width="200"/><br/>
+                        </volist>
+                        <elseif condition="$info['type'] eq 2"/>
+
+                        <volist name="info['filemsg']" id="vo">
+                            <embed src="{$vo['uploadurl']}"></embed>
+
+                        </volist>
+
+                        <else/>
+                        <volist name="info['filemsg']" id="vo">
+                            <audio id="demo" src="{$vo['uploadurl']}"></audio>
+                            <div>
+                                <button onclick="document.getElementById('demo').play()">播放</button>
+                                <button onclick="document.getElementById('demo').pause()">暂停</button>
+                                <button onclick="document.getElementById('demo').volume+=0.1">降低音量</button>
+                                <button onclick="document.getElementById('demo').volume-=0.1">提高音量</button>
+                            </div>
+                        </volist>
+                    </if>
+
+                </td>
+            </tr>
+        </if>
+
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+</body>
+</html>

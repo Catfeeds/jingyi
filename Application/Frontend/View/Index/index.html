@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JEANONE</title>
+
+
+    <link href="__ROOT__/Public/frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ROOT__/Public/frontend/css/jeanone.css" rel="stylesheet">
+
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="__ROOT__/Public/frontend/layer/layer.js"></script>
+
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .contact_str {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .contact-cl {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .videoMp4 {
+            width: 100%;
+            height: 400px;
+            object-fit: fill;
+            position: relative
+        }
+
+        .carousel-indicators li {
+            width: 40px !important;
+            height: 2px !important;
+            background-color: #2d2d2d;
+            border: 0px;
+            opacity: 0.5;
+        }
+
+        .carousel-indicators li .active {
+
+            background-color: #fff;
+
+        }
+
+        @media only screen and (max-width: 479px) {
+            .start_text {
+                letter-spacing: 10px !important;
+            }
+            .nav{
+                float: left!important;
+            }
+             .nav li{
+               margin-right: 10px;
+             }
+            .nav li a {
+                font-size: 12px;
+                padding: 2px;
+            }
+
+            .contact {
+                font-size: 12px;
+
+            }
+
+            .contact_str {
+                width: 20px !important;
+                margin-right: 5px !important;
+            }
+
+            .contact-cl1 {
+                /*width: 60%;*/
+                padding-right: 0px;
+                padding-left: 0px;
+            }
+
+            .contact-cl2 {
+                /*width: 40%;*/
+                padding-right: 0px;
+                padding-left: 0px;
+            }
+
+            .one_img {
+                height: 150px !important;
+                line-height: 150px !important;
+            }
+
+            .one_img img {
+                width: 20% !important;
+            }
+
+            .contact_address {
+                width: 70% !important;
+                margin-left: 15% !important;
+            }
+            .videoMp4 {
+                width: 100%;
+                height: 200px;
+                object-fit: fill;
+                position: relative
+            }
+            .nav{
+                width:440px;height: 60px;line-height: 30px
+            }
+            .headerBar{
+                overflow-x:scroll;
+            }
+            .layui-layer-lan{
+                width: 100%!important;
+            }
+            ::-webkit-scrollbar {/*隐藏滚轮*/
+                display: none;
+            }
+           .clubImg{
+               height: 200px!important;
+           }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-xs-12" style="text-align: center">
+                <h2><a href="{:U('Index/index')}" style="background-color: #fff;color: #000;text-decoration:none">JEANONE</a></h2>
+            </div>
+            <div class="col-lg-12 col-xs-12 headerBar" >
+                <ul class="nav nav-pills" style="">
+                    <li class=""><a href="about.html" > <span class="zeroSpan">{$data[0]['title_en']}</span><br><span class="oneSpan" style="color: red;display: none;text-align: center">{$data[0]['title']}</span></a></li>
+                    <li><a href="club.html"><span  class="zeroSpan">{$data[1]['title_en']}</span><br><span class="oneSpan" style="color: red;display: none;text-align: center">{$data[1]['title']}</span></a></li>
+                    <li><a href="international.html"><span  class="zeroSpan">{$data[2]['title_en']}</span><br><span class="oneSpan" style="color: red;display: none;text-align: center">{$data[2]['title']}</span></a></li>
+                    <li><a href="contact.html"><span  class="zeroSpan">{$data[3]['title_en']}</span><br><span class="oneSpan" style="color: red;display: none;text-align: center">{$data[3]['title']}</span></a></li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div id="myCarousel" class="carousel slide">
+        <!-- 轮播（Carousel）指标 -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <!-- 轮播（Carousel）项目 -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="http://static.runoob.com/images/mix/img_fjords_wide.jpg" alt="First slide">
+            </div>
+            <div class="item">
+                <img src="http://static.runoob.com/images/mix/img_nature_wide.jpg" alt="Second slide">
+            </div>
+            <div class="item">
+                <img src="http://static.runoob.com/images/mix/img_mountains_wide.jpg" alt="Third slide">
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-lg-12 col-xs-12  " style="text-align: center">
+        <h5 class="start_text"
+            style="letter-spacing:30px;text-align: center;height: 20px;line-height: 20px;color: #a1a1a1">START &nbsp;&nbsp;BELIEVING</h5>
+    </div>
+    <div class="col-lg-12 col-xs-12" style="text-align: center">
+        <div class="one_img" style="height: 300px;line-height: 300px">
+            <img src="__ROOT__/Public/frontend/images/club.png" style="width: 10%">
+
+        </div>
+        <div class="col-lg-6 col-xs-6" style="height: 100px">
+
+            <a href="javascript:void(0)" onclick="invitation()"
+               style="background-color: #fff;color: #000;text-decoration:none">邀约入口</a><br>
+            <span>Invitation entrance</span>
+
+        </div>
+        <div class="col-lg-6 col-xs-6" style="height: 100px">
+            <a href="javascript:void(0)" onclick="visitor()"
+               style="background-color: #fff;color: #000;text-decoration:none">游客入口</a><br>
+            <span>Visitor entrance</span>
+        </div>
+    </div>
+    <div class="carousel-inner">
+        <div style="height: 60px;line-height: 60px" onclick="javascript:window.location.href='about.html'">ABOUT JEANONE</a></div>
+        <div class="item active">
+            <video id="video1" class="videoMp4" controls="controls">
+                <source src="<php>echo $url->file_1</php>" type="video/mp4"/>
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+    </div>
+    <div class="carousel-inner">
+        <div style="height: 60px;line-height: 60px" onclick="javascript:window.location.href='club.html'">CLUB</div>
+        <div class="item active" >
+            <img src="<php>echo $url->file_2</php>" alt="First slide" class="clubImg" style="height: 400px">
+        </div>
+    </div>
+    <div class="carousel-inner">
+        <div style="height: 60px;line-height: 60px"onclick="javascript:window.location.href='international.html'">INTERNATIONAL ACTIVITIEW</div>
+        <div class="item active">
+            <!--<img src="http://static.runoob.com/images/mix/img_fjords_wide.jpg" alt="First slide">-->
+            <video id="video2" class="videoMp4" controls="controls">
+                <source src="<php>echo $url->file_3</php>" type="video/mp4"/>
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+    </div>
+    <div class="col-lg-12 col-xs-12 contact" style="text-align: center;padding-left: 0px;padding-right: 0px">
+        <div class="one_img" style="height: 300px;line-height: 300px">
+            <img src="__ROOT__/Public/frontend/images/club.png" style="width: 10%">
+        </div>
+        <div class="col-lg-6 col-xs-6 contact-cl contact-cl1" style="">
+            <img src="__ROOT__/Public/frontend/images/email.png" class="contact_str">headquarter@jeanone.club
+        </div>
+        <div class="col-lg-6 col-xs-6 contact-cl contact-cl2" style="">
+            <img src="__ROOT__/Public/frontend/images/email.png" class="contact_str">+86 028 84208958
+        </div>
+        <div class="col-lg-12 col-xs-12 contact-cl" style="">
+            <img src="__ROOT__/Public/frontend/images/code.png" class="contact_str">610041
+        </div>
+        <div class="col-lg-12 col-xs-12 contact_address" style="text-align: center;padding-top: 30px;margin-left: 25%;width: 50%;border-bottom: 1px dashed #342c2a;padding-bottom: 10px">
+            <img src="__ROOT__/Public/frontend/images/index.png" style="width: 100%;margin-bottom: 10px">
+            <br>
+            <img src="__ROOT__/Public/frontend/images/address.png"
+                 class="contact_str"><span>成都市·成华区·成华大道·龙潭路三路上东中心28F</span>
+        </div>
+        <div class="col-lg-12 col-xs-12 " style="padding-top: 30px;">
+            去不同的地方，遇见有趣的人，做有意思的事儿
+            <br>
+            SHARE AND ONTAIN
+        </div>
+    </div>
+    <footer class="col-lg-12 col-xs-12" style="text-align: center;margin: 30px auto">
+        2016-2020成都至一文化创艺有限公司版权所有，并保留所有权利。ICP备案证书号：蜀ICP备17012001号-1
+    </footer>
+    ​
+</div>
+</body>
+<script type="text/javascript">
+    function invitation() {
+        var sw =window.screen.width;//屏幕宽度
+
+        motai("{:U('Index/invitation')}");
+//        window.location.href = "contact.html?type=1"
+
+    }
+    function visitor() {
+        motai("{:U('Index/visitor')}");
+//        window.location.href = "contact.html?type=2"
+    }
+
+    /**
+     * 模态框
+     */
+    function motai(url) {
+        var index=layer.open({
+            type: 2,
+            title: false,
+            skin: 'layui-layer-lan', //样式类名
+            closeBtn:0, //不显示关闭按钮
+            anim: 0,
+            shadeClose: true, //开启遮罩关闭
+            content: url,
+            area: ['60%','80%'],
+            Boolean:true
+        });
+        layer.iframeAuto(index)
+    }
+    $(document).ready(function(){
+        $('#myCarousel').carousel({interval:5000});//每隔5秒自动轮播
+    });
+    $('.nav li a').mouseover(function () {
+            $(this).find('.oneSpan').css('display','block');
+           $(this).find('.zeroSpan').css('color','grey');
+    })
+     $('.nav li a').mouseout(function () {
+        $(this).find('.oneSpan').css('display','none')
+         $(this).find('.zeroSpan').css('color','#1b191a');
+    })
+    $('.nav li a').on('touchstart',function(){
+
+       $(this).find('.oneSpan').css('display','block');
+        $(this).find('.zeroSpan').css('color','grey');
+    })
+    $('.nav li a').on('touchend',function(){
+        $(this).find('.oneSpan').css('display','none')
+        $(this).find('.zeroSpan').css('color','#1b191a');
+    })
+</script>
+</html>

@@ -1,0 +1,28 @@
+<include file="Public:header" />
+<div class="cl pd-20" style=" background-color:#5bacb6">
+ 
+  <dl style="margin-left:0px; color:#fff">
+    <dt><span class="f-18">星球名称：{$info["planet_name"]}</span>  <span class="f-12">成长值：{$info["growth_value"]}</span> 
+    <dd class="pt-10 f-12" style="margin-left:0">星球简介： <if condition="$info['planet_summary']">{$info["planet_summary"]}<else />这家伙很懒,什么也没写。</if></dd>
+  </dl>
+</div>
+<div class="pd-20">
+  <table class="table">
+    <tbody>
+      <tr>
+        <th class="text-r" width="80">省市：</th>
+        <td>{$info["province"]}-{$info["city_name"]}</td>
+      </tr>
+      <tr>
+        <th class="text-r">注册时间：</th>
+        <td>{:date("Y-m-d H:i:s",$info['addtime'])}</td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+</body>
+</html>

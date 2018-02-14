@@ -1,0 +1,152 @@
+<include file="Public:header" />
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="page-container pd-20">
+    <form action="{:U('Order/index')}" method="get" >
+   	    <div class="text-c"> 日期范围：
+				<input type="text" onFocus="WdatePicker()" id="logmin" class="input-text Wdate" style="width:120px;" name="begintime">
+				-
+				<input type="text" onFocus="WdatePicker()" id="logmax" class="input-text Wdate" style="width:120px;" name="endtime">
+				<input type="text" name="subcode" placeholder=" 订单号" style="width:250px" class="input-text">
+				<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜订单</button>
+		</div>
+         </form>
+	<div class="mt-20">
+	<table class="table table-border table-bordered table-hover table-bg table-sort">
+		<thead>
+			<tr class="text-c">
+				<th width="100">订单号</th>
+				<th width="80">下单者昵称/账号</th>
+                <th width="80">接单者昵称/账号</th>
+				<th width="70">接单时间</th>
+                <th width="70">商品总价</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+        <volist name="list" id="vo">
+			<tr class="text-c">
+				<td>{$vo["subcode_num"]}</td>
+				<td><a title="下单者信息" href="javascript:;" onClick="add('下单者信息','{:U('User/show',array('id'=>$vo['userid']))}')" class="ml-5" style="text-decoration:none">{$vo["usernickname"]}<br/>{$vo["usertel"]}</a></td>
+                <td><a title="接单者信息" href="javascript:;" onClick="add('接单者信息','{:U('User/show',array('id'=>$vo['accept_userid']))}')" class="ml-5" style="text-decoration:none">{$vo["acceptnickname"]}<br/>{$vo["accepttel"]}</a> </td>
+				<td>{:date("Y-m-d H:i:s",$vo["accept_addtime"])}</td>
+                <td>{$vo["userid_symbol"]} {$vo["usermoney"]}<br/>{$vo["accept_symbol"]} {$vo["acceptusermoney"]}</td>
+				<td class="td-manage" style="font-size:18px">
+                <a title="订单详情" href="javascript:;" onClick="add('订单详情','{:U('Order/show',array('id'=>$vo['subcode_num']))}')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe627;</i></a> 
+                 
+               </td>
+			</tr>
+            </volist>
+		</tbody>
+	</table>
+	</div>
+    <div class="result page">{$page}</div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/My97DatePicker/WdatePicker.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+$(function(){
+	$('.table-sort').dataTable({
+		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
+		"bStateSave": true,//状态保存
+		"aoColumnDefs": [
+		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+		  {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
+		]
+	});
+	
+	$('.table-sort tbody').on( 'click', 'tr', function () {
+		if ( $(this).hasClass('selected') ) {
+			$(this).removeClass('selected');
+		}
+		else {
+			table.$('tr.selected').removeClass('selected');
+			$(this).addClass('selected');
+		}
+	});
+});
+
+/*用户-查看*/
+function member_show(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+/*用户-停用*/
+function member_stop(obj,id){
+	layer.confirm('确认加入非常购商品吗？',function(index){
+		$.ajax({
+			url:"{:U('Product/dostop')}",
+			dataType:'json',
+			type:'post',
+			data:{'id':id},
+			success:function(Msg){
+				if(Msg){
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:;" title="加入常购商品"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">非常购商品</span>');
+					$(obj).remove();
+					layer.msg('已加入非常购商品!',{icon: 5,time:1000});
+				}else{
+					layer.msg('操作失败！请重试....',{icon: 6,time:1000});
+				}
+			}
+		});
+	});
+		
+}
+
+/*用户-启用*/
+function member_start(obj,id){
+	layer.confirm('确认加入常购商品吗？',function(index){
+		
+		$.ajax({
+			url:"{:U('Product/dostart')}",
+			dataType:'json',
+			type:'post',
+			data:{'id':id},
+			success:function(Msg){
+				if(Msg){
+					$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,'+id+')" href="javascript:;" title="加入非常购商品"><i class="Hui-iconfont">&#xe631;</i></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">常购商品</span>');
+					$(obj).remove();
+					layer.msg('已加入常购商品!',{icon: 6,time:1000});
+				}else{
+					layer.msg('操作失败！请重试....',{icon: 6,time:1000});
+				}
+			}
+		});		
+		
+	});
+}
+
+/*用户-编辑*/
+function member_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*产品-添加*/
+function  add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+
+/*图片-编辑*/
+function product_edit(title,url,id){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+
+</script>
+ 
+</body>
+</html>

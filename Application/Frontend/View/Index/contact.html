@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>JEANONE</title>
+
+
+    <link href="__ROOT__/Public/frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="__ROOT__/Public/frontend/css/jeanone.css" rel="stylesheet">
+
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="__ROOT__/Public/frontend/js/common.js"></script>
+    <style>
+        /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .contact_str {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .contact-cl {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .entrance p {
+            text-indent: 2em;
+            text-align: left;
+        }
+
+        .invitation, .visitor, .information {
+            display: none;
+            z-index: 105;
+            position: fixed;
+            top: 15%;
+            text-align: center;
+            background-color: #fff;
+            width: 60%;
+            margin-left: 20%
+        }
+
+        .invitation .one_img, .visitor .one_img, .information .one_img {
+            height: 200px;
+            line-height: 200px;
+            background-color: #f6f6f6;
+            position: relative
+        }
+
+        .entrance_title {
+            width: 80%;;
+            text-align: left;
+            color: #74BC32;
+            position: absolute;
+            top: 130px;
+            height: 30px;
+            line-height: 30px
+        }
+
+        .invitationInfo, .visitorInfo, .addInfo {
+            text-align: center;
+            border-top: 1px dashed #342c2a;
+            margin-left: 33%;
+            margin-top: 100px;
+            padding-top: 20px;
+            padding-bottom: 80px
+        }
+
+        .entrance {
+            padding-top: 30px;
+        }
+
+        p input, p textarea {
+            border: 0;
+            resize: none
+        }
+
+        @media only screen and (max-width: 479px) {
+
+            .nav li a {
+                font-size: 12px;
+                padding: 2px;
+            }
+
+            .contact {
+                font-size: 12px;
+
+            }
+
+            .contact_str {
+                width: 20px !important;
+                margin-right: 5px !important;
+            }
+
+            .contact-cl1 {
+                /*width: 50%;*/
+                padding-right: 0px;
+                padding-left: 0px;
+            }
+
+            .contact-cl2 {
+                /*width: 50%;*/
+                padding-right: 0px;
+                padding-left: 0px;
+            }
+
+            .one_img {
+
+                height: 150px !important;
+                line-height: 150px !important;
+            }
+
+            .one_img img {
+                width: 30% !important;
+            }
+
+            .contact_address {
+                width: 70% !important;
+                margin-left: 15% !important;
+            }
+
+            .invitation, .visitor, .information {
+                display: none;
+                z-index: 105;
+                position: fixed;
+                top: 5%;
+                text-align: center;
+                background-color: #fff;
+                width: 100%;
+                margin-left: 0%;
+                bottom: 5%;
+            }
+
+            .invitation .one_img {
+                background-color: #f6f6f6;
+                position: relative
+            }
+
+            .entrance_title {
+                top: 100px;
+                height: 20px;
+                line-height: 20px
+            }
+
+            .entrance {
+                padding-top: 10px !important;
+            }
+
+            h3 {
+                margin-top: 10px;
+            }
+
+            .invitationInfo, .visitorInfo, .addInfo {
+                margin-top: 20px;
+                padding-bottom: 20px;
+
+            }
+
+            .contact .one_img img {
+                width: 20% !important;
+            }
+            .nav{
+                width:440px;height: 60px;line-height: 30px;  float: left!important;margin-left: -80px;
+            }
+            .nav li{
+                margin-right: 10px;
+            }
+            .headerBar{
+                overflow-x:scroll;
+            }
+            ::-webkit-scrollbar {/*隐藏滚轮*/
+                display: none;
+            }
+
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-xs-12" style="text-align: center">
+                <h2><a href="{:U('Index/index')}" style="background-color: #fff;color: #000;text-decoration:none">JEANONE</a></h2>
+            </div>
+            <div class="col-lg-12 col-xs-12 headerBar">
+                <ul class="nav nav-pills">
+                 <!--   <li class=""><a href="about.html"> {$data[0]['title_en']}</a></li>
+                    <li><a href="club.html">{$data[1]['title_en']}</a></li>
+                    <li><a href="international.html" style="">{$data[2]['title_en']}</a></li>
+                    <li style="text-align: center"><a href=""><span style="color: grey">{$data[3]['title_en']}</span><br><span
+                            style="color: red">{$data[3]['title']}</span></a></li>-->
+                    <li class=""><a href="about.html" > <span class="zeroSpan">{$data[0]['title_en']}</span><br><span class="oneSpan" style="color: red;display: none;text-align: center">{$data[0]['title']}</span></a></li>
+                    <li><a href="club.html"><span  class="zeroSpan">{$data[1]['title_en']}</span><br><span class="oneSpan" style="color: red;display: none;text-align: center">{$data[1]['title']}</span></a></li>
+                    <li><a href="international.html"><span  class="zeroSpan">{$data[2]['title_en']}</span><br><span class="oneSpan" style="color: red;display: none;text-align: center">{$data[2]['title']}</span></a></li>
+                    <li><a href="contact.html"><span  class="zeroSpan">{$data[3]['title_en']}</span><br><span class="oneSpan" style="color: red;display: block;text-align: center">{$data[3]['title']}</span></a></li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+
+
+    <div class="col-lg-12 col-xs-12 contact" style="text-align: center;padding-left: 0px;padding-right: 0px">
+        <div class="one_img" style="height: 300px;line-height: 300px">
+            <img src="__ROOT__/Public/frontend/images/club.png" style="width: 10%">
+        </div>
+        <div class="col-lg-6 col-xs-6 contact-cl contact-cl1" style="">
+            <img src="__ROOT__/Public/frontend/images/email.png" class="contact_str">headquarter@jeanone.club
+        </div>
+        <div class="col-lg-6 col-xs-6 contact-cl contact-cl2" style="">
+            <img src="__ROOT__/Public/frontend/images/email.png" class="contact_str">+86 028 84208958
+        </div>
+        <div class="col-lg-12 col-xs-12 contact-cl" style="">
+            <img src="__ROOT__/Public/frontend/images/code.png" class="contact_str">610041
+        </div>
+        <div class="col-lg-12 col-xs-12 contact_address" style="text-align: center;padding-top: 30px;margin-left: 25%;width: 50%;border-bottom: 1px dashed #342c2a;padding-bottom: 10px">
+            <img src="__ROOT__/Public/frontend/images/index.png" style="width: 100%;margin-bottom: 10px">
+            <br>
+            <img src="__ROOT__/Public/frontend/images/address.png"
+                 class="contact_str"><span>成都市·成华区·成华大道·龙潭路三路上东中心28F</span>
+        </div>
+        <div class="col-lg-12 col-xs-12 " style="padding-top: 30px;">
+            去不同的地方，遇见有趣的人，做有意思的事儿
+            <br>
+            SHARE AND ONTAIN
+        </div>
+    </div>
+    <footer class="col-lg-12 col-xs-12" style="text-align: center;margin: 30px auto">
+        2016-2020成都至一文化创艺有限公司版权所有，并保留所有权利。ICP备案证书号：蜀ICP备17012001号-1
+    </footer>
+    ​
+</div>
+<div class="diaload_bg"></div>
+<!--邀请入口-->
+<div class="container  invitation" style="">
+    <div class="col-lg-12 col-xs-12 contact" style="text-align: center;">
+        <div class="one_img" style="">
+            <img src="__ROOT__/Public/frontend/images/club.png" style="width: 10%">
+        </div>
+        <div class="col-lg-12 col-xs-12  entrance_title" style="">
+            邀请入口
+            <div>Invitation entrance</div>
+        </div>
+        <div class="col-lg-12 col-xs-12 entrance " style="padding-top: 30px;">
+            <h3>JEANONE 净一</h3>
+            <h3>星球主推荐访客信息征集问卷</h3>
+            <p style="padding-top: 20px">亲爱的地球人，你好！欢迎到访[JEANONE 净一]星系，光速航班正在平稳飞行。考虑到你在人类地球虚拟世界中以低熵形态
+                存在的太久了，请认真填写以下文字进行快速“变身”，以便使你更加适应宇宙中长期的星际航行。若在我们双方深度了解并确认的情况下，你成为星球主，
+                在净一APP“我的星球”页面将会展示你同意公开的信息内容。如果遗憾错过，我们会在相关法律的保护下尊重你的隐私权，务必如实准确填写你的资料。</p>
+            <p>本次了解函件包括【基本信息】、【兴趣爱好】、【延伸了解】、【深度了解】、【我有话说】五个部分，预计30分钟完成。接下来，请端一杯热茶，
+                放上喜欢的音乐，在舒适惬意的心境中，完成这一份《信息征集问卷》，请点击“下一步”开始。</p>
+        </div>
+        <div class="col-lg-4 col-xs-4  invitationInfo" style="">
+            下一步
+            <div>move on</div>
+        </div>
+    </div>
+</div>
+<!--游客入口-->
+<div class="container  visitor" style="">
+    <div class="col-lg-12 col-xs-12 contact" style="text-align: center;">
+        <div class="one_img">
+            <img src="__ROOT__/Public/frontend/images/club.png" style="width: 10%">
+        </div>
+        <div class="col-lg-12 col-xs-12  entrance_title">
+            游客入口
+            <div>Visitor entrance</div>
+        </div>
+
+        <div class="col-lg-12 col-xs-12 entrance ">
+            <h3>JEANONE 净一</h3>
+            <h3>游客信息征集问卷</h3>
+            <p style="padding-top: 20px">很高兴认识你，神奇的地球人！感谢你的关注,考虑到你在人类地球虚拟世界中以低熵形态
+                存在的太久了，现在，我们需要你认真填写以下文字，使我们能了解你的真实情况。我们期盼能够有一日你能加入到净一星系中。</p>
+            <p>本次了解函件包括【基本信息】、【兴趣爱好】、【延伸了解】、【深度了解】、【我有话说】五个部分，预计30分钟完成,若在我们双方深度了解并确认的情况下，你成为星球主，
+                在净一APP“我的星球”页面将会展示你同意公开的信息内容。如果遗憾错过，我们会在相关法律的保护下尊重你的隐私权，务必如实准确填写你的资料。</p>
+            <p>接下来，请端一杯热茶，放上喜欢的音乐，在舒适惬意的心境中，完成这一份《信息征集问卷》，请点击“下一步”开始。</p>
+        </div>
+        <div class="col-lg-4 col-xs-4 visitorInfo" style="">
+            下一步
+            <div>move on</div>
+        </div>
+    </div>
+</div>
+<!--信息填写-->
+<div class="container  information" style="overflow: scroll">
+
+    <div class="col-lg-12 col-xs-12 contact" style="text-align: center;">
+        <div class="one_img">
+            <img src="__ROOT__/Public/frontend/images/club.png" style="width: 10%">
+        </div>
+        <div class="col-lg-12 col-xs-12 entrance_title">
+            游客入口
+            <div>Visitor entrance</div>
+        </div>
+
+        <div class="col-lg-12 col-xs-12 entrance " style="padding-top: 30px;text-align: left">
+            <!--<p style="font-size: 16px;font-weight: bold"><span>地球人名:</span><input type="text" ></p>-->
+            <p><span style="font-size: 16px;font-weight: bold">基本信息*</span></p>
+            <p>*<span>地球人名:</span><input type="text"></p>
+            <p>*<span>性别:</span><input type="radio" name="sex">男 <input type="radio" name="sex">女</p>
+            <p>*<span>出生日期:</span><input type="text"></p>
+            <p>*<span>电话:</span><input type="tel"></p>
+            <p>*<span>从事行业:</span><input type="text"></p>
+            <p>*<span>电子邮件:</span><input type="text"></p>
+            <p>*<span>微信号:</span><input type="text"></p>
+            <p>*<span>你通过何种方式了解到净一?</span><br><textarea style="width: 100%;"></textarea></p>
+            <p>*<span>你对净一的印象?</span><br><textarea style="width: 100%;"></textarea></p>
+        </div>
+        <div class="col-lg-12 col-xs-12 entrance " style="padding-top: 30px;text-align: left">
+            <!--接下来就该你们表演了-->
+            <p><span style="font-size: 16px;font-weight: bold">兴趣爱好*</span></p>
+
+        </div>
+        <div class="col-lg-4 col-xs-4  addInfo">
+            保存并下一步
+            <div>save and move on</div>
+        </div>
+    </div>
+
+    ​
+</div>
+
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var type = GetQueryString('type');
+        if (type == 1) {
+            $('.diaload_bg').show()
+            $('.invitation').show()
+        } else if (type == 2) {
+
+            $('.diaload_bg').show()
+            $('.visitor').show()
+        }
+
+    });
+    $('.visitorInfo').on('click', function () {
+
+        $('.visitor').hide();
+        $('.information').show()
+    })
+    $('.invitationInfo').on('click', function () {
+
+        $('.invitation').hide();
+        $('.information').show()
+    })
+    $('.nav li a').mouseover(function () {
+        $(this).find('.oneSpan').css('display','block');
+        $(this).find('.zeroSpan').css('color','grey');
+    })
+    $('.nav li a').mouseout(function () {
+        $(this).find('.oneSpan').css('display','none')
+        $(this).find('.zeroSpan').css('color','#1b191a');
+    })
+/*    $('.nav li a').on('touchstart',function(){
+
+        $(this).find('.oneSpan').css('display','block');
+        $(this).find('.zeroSpan').css('color','grey');
+    })
+    $('.nav li a').on('touchend',function(){
+        $(this).find('.oneSpan').css('display','none')
+        $(this).find('.zeroSpan').css('color','#1b191a');
+    })*/
+</script>
+</html>

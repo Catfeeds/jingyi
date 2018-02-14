@@ -1,0 +1,212 @@
+﻿<include file="Public:header"/>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span
+        class="c-gray en">&gt;</span> 用户管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container pd-20">
+    <div class="mt-20">
+        <div class="cl pd-5 bg-1 bk-gray mt-20 ">
+   <span class="l"><a class="btn btn-primary radius" href="{:U('User/index')}"> 全部</a>
+     <a class="btn btn-primary radius" href="{:U('User/index',array('status'=>2))}">冻结账号</a>
+   </span>
+            <span class="r">共有数据：<strong>{:count($list)}</strong> 条</span>
+        </div>
+
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="80">ID</th>
+                <th width="100">账号</th>
+                <th width="100">真实姓名</th>
+                <th width="100">星球名称</th>
+                <th width="130">注册时间</th>
+                <th width="100">推荐码</th>
+                <th width="70">状态</th>
+                <th width="70">是否拉黑</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="text-c">
+                    <td>{$vo["userid"]}</td>
+                    <td><a title="用户详情" href="javascript:;"
+                           onClick="add_allp('用户详情','{:U('User/show',array('id'=>$vo[userid]))}')" class="ml-5"
+                           style="text-decoration:none">({$vo['countrynum']}) {$vo["tel"]}</a></td>
+                    <td>{$vo["real_name"]}</td>
+                    <td>
+                        <if condition="$vo[planet_id]">
+                            <a title="星球详情" href="javascript:;"
+                               onClick="add_allp('星球详情','{:U('User/planetshow',array('id'=>$vo[planet_id]))}')"
+                               class="ml-5" style="text-decoration:none">{$vo["planet_name"]}</a>
+                            <else/>
+                            暂未创建
+                        </if>
+                    </td>
+                    <td>{:date("Y-m-d H:i:s",$vo["addtime"])}</td>
+                    <td>{$vo.number}</td>
+                    <td class="td-status">
+                        <if condition="$vo['status'] eq 1"><span class="label label-success radius">已启用</span>
+                            <else/>
+                            <span class="label radius">已停用</span></if>
+                    </td>
+                    <td class="td-status">
+                        <if condition="$vo['black'] eq 1"><span class="label radius">已拉黑</span>
+                            <else/>
+                            <span class="label radius label-success ">正常</span></if>
+                    </td>
+                    <td class="td-manage" style="font-size:20px">
+
+                        <if condition="$vo['black'] eq 0">
+                            <a title="拉黑" href="javascript:;" class="ml-5" style="text-decoration:none"
+                               onClick="black('{$vo[userid]}')"><i class="Hui-iconfont">&#xe624;</i></a>
+                        </if>
+
+                        <a title="查看用户流水" href="javascript:;" onClick="member_edit('用户流水','','{$vo[userid]}')"
+                           class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe618;</i></a>
+                        <a title="添加商品" href="javascript:;" onClick="add_allp(' {$vo[" tel"]}
+                        >>添加商品','{:U('Product/add',array('id'=>$vo[userid]))}')" class="ml-5"
+                        style="text-decoration:none"><i class="Hui-iconfont"> &#xe620;</i></a>
+                        <a title="修改用户信息" href="javascript:;"
+                           onClick="add_allp('修改用户信息','{:U('User/edit',array('id'=>$vo[userid]))}')" class="ml-5"
+                           style="text-decoration:none"><i class="Hui-iconfont">&#xe60c;</i></a>
+
+                        <a title="用户信息统计" href="javascript:;"
+                           onClick="add_allp('用户信息统计','{:U('User/mycount',array('userid'=>$vo[userid]))}')" class="ml-5"
+                           style="text-decoration:none"><i class="Hui-iconfont">&#xe621;</i></a>
+                        <a title="用户成长值" href="javascript:;" onClick="member_edit2('用户成长值','','{$vo[userid]}')"
+                           class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe61e;</i></a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.table-sort').dataTable({
+            "aaSorting": [[1, "desc"]],//默认第几个排序
+            "bStateSave": true,//状态保存
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {"orderable": false, "aTargets": [5]}// 制定列不参与排序
+            ]
+        });
+
+        $('.table-sort tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+//			table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    });
+
+    /*查看流水*/
+    function member_edit(title, url, id, w, h) {
+        url = '__MODULE__/user/wallet_water/id/' + id;
+        layer_show(title, url, w, h);
+    }
+
+    function member_edit2(title, url, id, w, h) {
+        url = '__MODULE__/user/user_wallet_water/id/' + id;
+        layer_show(title, url, w, h);
+    }
+
+    /*用户-停用*/
+    function member_stop(obj, id) {
+        layer.confirm('确认要停用吗？', function (index) {
+            $.ajax({
+                url: "{:U('User/dostop')}",
+                dataType: 'json',
+                type: 'post',
+                data: {'id': id},
+                success: function (Msg) {
+                    if (Msg) {
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,' + id + ')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
+                        $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+                        $(obj).remove();
+                        layer.msg('已停用!', {icon: 5, time: 1000});
+                    } else {
+                        layer.msg('操作失败！请重试....', {icon: 6, time: 1000});
+                    }
+                }
+            });
+        });
+
+    }
+
+    /*用户-启用*/
+    function member_start(obj, id) {
+        layer.confirm('确认要启用吗？', function (index) {
+            $.ajax({
+                url: "{:U('User/dostart')}",
+                dataType: 'json',
+                type: 'post',
+                data: {'id': id},
+                success: function (Msg) {
+                    if (Msg) {
+                        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,' + id + ')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
+                        $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+                        $(obj).remove();
+                        layer.msg('已启用!', {icon: 6, time: 1000});
+                    } else {
+                        layer.msg('操作失败！请重试....', {icon: 6, time: 1000});
+                    }
+                }
+            });
+
+        });
+    }
+
+    /*添加--全屏*/
+    function add_allp(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+    /**
+     * 拉黑
+     * @type {string}
+     */
+    function black(id) {
+        layer.confirm('确定要拉黑该用户吗？', function (index) {
+            $.ajax({
+                url: "{:U('User/black')}",
+                dataType: 'json',
+                type: 'post',
+                data: {'userid': id},
+                success: function (re) {
+                   console.log(re);
+                    if(re.code==200){
+                        layer.msg(re.msg, {icon: 1,time:1000});
+                        location.reload();
+                    }else{
+                        layer.msg(re.msg, {icon: 5,time:1000});
+                    }
+                },error:function(){
+                    return msg('请求失败',201);
+                }
+            });
+
+        });
+    }
+
+</script>
+
+</body>
+</html>

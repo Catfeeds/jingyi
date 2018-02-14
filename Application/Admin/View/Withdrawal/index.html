@@ -1,0 +1,111 @@
+<include file="Public:header"/>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 提现申请管理 <span
+        class="c-gray en">&gt;</span> 提现申请 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container pd-20">
+    <div id="container" style="min-width:700px;height:400px;display: none"></div>
+    <div id="container-list">
+
+        <form action="{:U('Withdrawal/index')}" method="get">
+            <div class="text-c">
+                日期范围：
+                <input type="text" onFocus="WdatePicker()" id="logmin" class="input-text Wdate" style="width:120px;"
+                       name="begintime" value="{$begintime}">
+                -
+                <input type="text" onFocus="WdatePicker()" id="logmax" class="input-text Wdate" style="width:120px;"
+                       name="endtime" value="{$endtime}">
+                <button name="search" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>
+                    搜索
+                </button>
+            </div>
+        </form>
+        <div class="cl pd-5 bg-1 bk-gray mt-20">
+			<span class="l">
+				<a title="导出excel" href="{:U('Withdrawal/excel_to',array('begintime'=>$begintime,'endtime'=>$endtime))}"
+                   class="ml-5 btn btn-success radius" style="text-decoration:none"><i class="Hui-iconfont">&#xe644;</i> 导出excel信息</a>
+			</span>
+        </div>
+        <div class="mt-20">
+
+            <table class="table table-border table-bordered table-hover table-bg table-sort">
+                <thead>
+                <tr class="text-c">
+                    <th width="80">开户银行</th>
+                    <th width="70">银行卡号</th>
+                    <th width="70">开户人名称</th>
+                    <th width="70">申请账号</th>
+                    <th width="70">申请时间</th>
+                    <th width="80">金额</th>
+                    <th width="80">审核状态</th>
+                    <th width="80">审核备注</th>
+                    <th width="30">审核</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="vo">
+                    <tr class="text-c">
+                        <td>{$vo["cardbank"]}</td>
+                        <td>{$vo["cardnum"]}</td>
+                        <td>{$vo["cardusername"]}</td>
+                        <td>{$vo["tel"]}</td>
+                        <td>{:date("Y-m-d H:i:s",$vo["addtime"])}</td>
+                        <td>￥{$vo["moneynum"]}</td>
+                        <td>
+                            <php>
+                            if($vo['result']==0){
+                                echo '未审核';
+                            }elseif($vo['result']==1){
+                                echo '审核通过';
+                            }else{
+                                echo '审核失败';
+                            }
+                            </php>
+                        </td>
+                        <td>{$vo["result_msg"]}</td>
+                        <td>
+                            <if condition="$vo['result']==0">
+                            <a title="处理" href="javascript:;" class="ml-5" style="text-decoration:none" onClick="set_hot('{$vo[id]}')"><i class="Hui-iconfont">&#xe6de;</i></a>
+                                <else/>
+                                已审核
+                            </if>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+        </div>
+        <div class="result page">{$page}</div>
+    </div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/Highcharts/4.1.7/js/highcharts.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/Highcharts/4.1.7/js/modules/exporting.js"></script>
+<script>
+    var to_info_url = "{:U('Withdrawal/examine')}";
+    function set_hot(id) {
+        layer.open({
+            type: 2,
+            title: '处理提现申请',
+            shadeClose: true,
+            shade: false,
+            maxmin: true,
+            scrollbar: false,
+            area: ['400px', '380px'],
+            content: to_info_url + '?id=' + id
+        });
+    }
+</script>
+
+</body>
+</html>

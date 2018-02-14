@@ -1,0 +1,149 @@
+﻿<include file="Public:header"/>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 贴子管理 <span
+        class="c-gray en">&gt;</span> 星球帖管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                               href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container pd-20">
+    <form method="get" action="">
+        <div class="text-c"> 日期范围：
+            <input type="text" onFocus="WdatePicker()" id="logmin" class="input-text Wdate" style="width:120px;"
+                   name="start" value="{$return.start}">
+            -
+            <input type="text" onFocus="WdatePicker()" id="logmax" class="input-text Wdate" style="width:120px;"
+                   name="end" value="{$return.end}">
+
+            <span class="select-box" style="width:150px">
+        <select class="select" name="type" size="1">
+            <option value="" selected>选择类型</option>
+            <option value="1"
+            <php>echo $return['type']==1?'selected':''</php>
+             >图片</option>
+            <option value="3"
+            <php>echo $return['type']==3?'selected':''</php>
+            >音频</option>
+            <option value="2"
+            <php>echo $return['type']==2?'selected':''</php>
+            >视频</option>
+        </select>
+        </span>
+            <input type="text" name="username" placeholder=" 发布者" style="width:250px" class="input-text"
+                   value="{$return.username}">
+            <button name="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+        </div>
+    </form>
+
+    <div class="mt-20">
+        <div class="cl pd-5 bg-1 bk-gray mt-20 ">
+            <span class="r">共有数据：<strong>{$count}</strong> 条</span>
+        </div>
+
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="10">ID</th>
+                <th width="20">类型</th>
+                <th width="30">内容</th>
+                <th width="30">上传文件</th>
+                <th width="10">发布者</th>
+                <th width="20">定位地址</th>
+                <th width="10">状态</th>
+                <th width="10">转发数量</th>
+                <th width="20">发布时间</th>
+                <th width="10">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="text-c">
+                    <td>{$vo.posts_id}</td>
+                    <td>
+                        <if condition="$vo['type'] eq 1"> 图片
+                            <elseif condition="$vo['type'] eq 2"/>
+                            视频
+                            <elseif condition="$vo['type'] eq 3"/>
+                            音频
+                            <else/>
+                            未知
+                        </if>
+                    </td>
+                    <td>{$vo.post_content}</td>
+
+                    <td>
+                        <a title="查看贴子详情" href="javascript:;" onClick="fullp('查看贴子详情','{:U('Report/show',array('type'=>2,'postsid'=>$vo[\'posts_id\']))}')"
+                           class="ml-5" style="text-decoration:none">详细</a></td>
+                    </td>
+                <!--<video src="{$vo.uploadurl}" style="max-width: 200px"></video>-->
+
+                <td>{$vo.username}</td>
+                <td>{$vo.address}</td>
+                <td>
+                    <if condition="$vo['status'] eq 0">非匿名
+                        <else/>
+                        匿名
+                    </if>
+                </td>
+                <td>{$vo.retransmissionnum}</td>
+                <td>
+                    <php>echo date('Y-m-d H:i:s',$vo['addtime'])</php>
+                </td>
+                <td class="td-manage" style="font-size:20px">
+                    <a title="删除" href="javascript:;" class="ml-5" style="text-decoration:none"
+                       onClick="del('{$vo[posts_id]}')"><i class="Hui-iconfont">&#xe6dd;</i></a>
+                </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <br/>
+        <div class="pages" style="float: right">{$page}</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+    /**
+     * 删除
+     * @type {string}
+     */
+    function del(id) {
+        layer.confirm('确定要删除该星球帖吗？', function (index) {
+            $.ajax({
+                url: "{:U('Posts/del')}",
+                dataType: 'json',
+                type: 'post',
+                data: {'posts_id': id},
+                success: function (re) {
+                    console.log(re);
+                    if (re.code == 200) {
+                        layer.msg(re.msg, {icon: 1, time: 1000});
+                        location.reload();
+                    } else {
+                        layer.msg(re.msg, {icon: 5, time: 1000});
+                    }
+                }, error: function () {
+                    return msg('请求失败', 201);
+                }
+            });
+
+        });
+    }
+    function fullp(title, url) {
+        var index = layer.open({
+            type: 2,
+            title: title,
+            content: url
+        });
+        layer.full(index);
+    }
+
+</script>
+
+</body>
+</html>

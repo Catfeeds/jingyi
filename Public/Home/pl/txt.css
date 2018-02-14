@@ -1,0 +1,100 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+    background:url(./bg_sky_background.png);
+	background-size:100%;
+	background-repeat:no-repeat;
+	background-position:center;
+}
+
+	
+.galaxy{
+	padding:0 10%;
+	position:relative;
+	z-index:99999;
+}
+
+
+
+.mercury-track{
+    border: 1px solid #555;
+	position: absolute;
+}
+.venus-track{
+    border: 1px solid #555;
+	position: absolute;
+}
+.earth1-track{
+    border: 1px solid #555;
+	border-bottom:0px dashed #555;
+	position: absolute;
+}
+.mars-track{
+    border: 1px solid #555;
+	position: absolute;
+}
+
+.jupiter-track{
+    border: 1px dashed #555;
+	position: absolute;
+}
+.y1-track{
+	border-right:3px solid #555;
+	position: absolute;
+}
+
+.y2-track{
+	border-bottom:1px solid #C30;
+	position: absolute;
+}
+	
+.mercury{
+	position: absolute;
+    width: 35px;
+    height: 35px;
+    animation: rotation 4.8s linear infinite;
+}
+
+
+.venus{
+	position: absolute;
+	width: 40px;
+    height: 40px;
+    animation: rotation 12.32s linear infinite;
+}
+
+
+.earth1{
+	position: absolute;
+    width: 35px;
+    height: 35px;
+    animation: rotation 20s linear infinite;
+ 
+}
+
+
+
+.mars{
+	position: absolute;
+    width: 40px;
+    height: 40px;
+    animation: rotation 38s linear infinite;
+
+}
+
+
+.jupiter{
+	position: absolute;
+    width: 50px;
+    height: 50px;
+    animation: rotation 60s linear infinite;
+}
+
+
+
+@keyframes rotation{
+    to{
+        transform: rotate(360deg);
+    }
+}

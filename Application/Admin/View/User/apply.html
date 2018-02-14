@@ -1,0 +1,96 @@
+﻿<include file="Public:header"/>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户管理 <span
+        class="c-gray en">&gt;</span> 用户申请 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container pd-20">
+    <div class="mt-20">
+
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="80">手机号</th>
+                <th width="100">申请时间</th>
+                <th width="100">状态</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="text-c">
+                    <td>{$vo.tel}</td>
+                    <td>{:date("Y-m-d H:i:s",$vo["apply_time"])}</td>
+                    <td>
+                        <if condition="$vo.apply eq 0">待审核
+                            <elseif condition="$vo.apply eq 1"/>审核失败
+                            <elseif condition="$vo.apply eq 2"/>审核通过
+                                <else/>未知
+                        </if>
+                    </td>
+                    <td class="td-manage" style="font-size:20px">
+                        <if condition="$vo.apply eq 0">
+                        <a title="审核通过" href="javascript:;" class="ml-5" style="text-decoration:none" onClick="success('{$vo[userid]}')"><i class="Hui-iconfont">&#xe6e1;</i></a>
+                        <a title="审核失败" href="javascript:;" class="ml-5" style="text-decoration:none" onClick="fail('{$vo[userid]}')"><i class="Hui-iconfont">&#xe6dd;</i></a>
+                        </if>
+
+                        <a title="用户成长值" href="javascript:;" onClick="member_edit2('问卷详情','','{$vo[userid]}')"
+                           class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6b3;</i></a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <br/>
+        <div class="pages" style="float: right">{$page}</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/js/common.js"></script>
+<script type="text/javascript">
+    /**
+     * 删除
+     * @type {string}
+     */
+    function fail(id) {
+        layer.confirm('确定要驳回该申请吗？', function (index) {
+            $.ajax({
+                url: "{:U('User/apply_fail')}",
+                dataType: 'json',
+                type: 'post',
+                data: {'userid': id},
+                success: function (re) {
+                   console.log(re);
+                    if(re.code==200){
+                        layer.msg(re.msg, {icon: 1,time:1000});
+                        location.reload();
+                    }else{
+                        layer.msg(re.msg, {icon: 5,time:1000});
+                    }
+                },error:function(){
+                    return msg('请求失败',201);
+                }
+            });
+
+        });
+    }
+
+    function success(id) {
+        var to_add_url = "{:U('User/add')}";
+        location.href=to_add_url+'?userid='+id;
+    }
+
+    function member_edit2(title, url, id, w, h) {
+        url = '__MODULE__/user/apply_info/userid/' + id;
+        layer_show(title, url, w, h);
+    }
+</script>
+
+</body>
+</html>

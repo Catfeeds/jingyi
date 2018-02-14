@@ -1,0 +1,104 @@
+﻿<include file="Public:header"/>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户问答管理 <span
+        class="c-gray en">&gt;</span> 问题列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
+                                              href="javascript:location.replace(location.href);" title="刷新"><i
+        class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container pd-20">
+    <div class="mt-20">
+        <div class="cl pd-5 bg-1 bk-gray mt-20 ">
+            <span><button type="button" class="btn btn-primary radius" id="btn-add-admin">添加</button></span>
+        </div>
+
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th width="80">问题</th>
+                <th width="100">添加时间</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="list" id="vo">
+                <tr class="text-c">
+                    <td>{$vo.name}</td>
+                    <td>{:date("Y-m-d H:i:s",$vo["add_time"])}</td>
+                    <td class="td-manage" style="font-size:20px">
+                        <a title="删除" href="javascript:;" class="ml-5" style="text-decoration:none" onClick="del('{$vo[question_id]}')"><i class="Hui-iconfont">&#xe6dd;</i></a>
+                        <a title="修改" href="javascript:;" class="ml-5" style="text-decoration:none" onClick="edit('{$vo[question_id]}')"><i class="Hui-iconfont">&#xe6df;</i></a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+        <br/>
+        <div class="pages" style="float: right">{$page}</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/js/common.js"></script>
+<script type="text/javascript">
+    /**
+     * 删除
+     * @type {string}
+     */
+    function del(id) {
+        layer.confirm('确定要删除该问题吗？', function (index) {
+            $.ajax({
+                url: "{:U('Question/del')}",
+                dataType: 'json',
+                type: 'post',
+                data: {'question_id': id},
+                success: function (re) {
+                   console.log(re);
+                    if(re.code==200){
+                        layer.msg(re.msg, {icon: 1,time:1000});
+                        location.reload();
+                    }else{
+                        layer.msg(re.msg, {icon: 5,time:1000});
+                    }
+                },error:function(){
+                    return msg('请求失败',201);
+                }
+            });
+
+        });
+    }
+    /**
+     * 添加
+     */
+    $('#btn-add-admin').click(function(){
+        var to_add_url = "{:U('Question/add')}";
+        layer.open({
+            type: 2,
+            title: '添加问题',
+            shadeClose: true,
+            shade: false,
+            maxmin: true,
+            area: ['500px', '200px'],
+            content: to_add_url
+        });
+    });
+
+    function edit(id) {
+        var to_add_url = "{:U('Question/add')}";
+        layer.open({
+            type: 2,
+            title: '修改问题',
+            shadeClose: true,
+            shade: false,
+            maxmin: true,
+            area: ['500px', '200px'],
+            content: to_add_url+'?question_id='+id
+        });
+    }
+</script>
+
+</body>
+</html>

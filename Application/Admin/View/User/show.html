@@ -1,0 +1,87 @@
+<include file="Public:header" />
+<div class="cl pd-20" style=" background-color:#5bacb6">
+  <img class="avatar size-XL l" src="__ROOT__/{$info['headimg']}">
+  <dl style="margin-left:80px; color:#fff">
+    <dt><span class="f-18">昵称： <if condition="$info['username']">{$info["username"]}<else />未填</if></span> <span class="pl-10 f-12">账号：({$info['countrynum']}) {$info["tel"]}</span></dt>
+    <dd class="pt-10 f-12" style="margin-left:0">个性签名： <if condition="$info['autograph']">{$info["autograph"]}<else />这家伙很懒,什么也没写。</if></dd>
+  </dl>
+</div>
+<div class="pd-20">
+    <a title="导出excel" href="{:U('User/show',['id'=>$userid,'type'=>1])}" class="ml-5 btn btn-success radius" style="text-decoration:none"><i class="Hui-iconfont">&#xe644;</i> 导出excel信息</a>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th class="text-r" width="80">性别：</th>
+        <td><if condition="$info['sex'] eq 1 ">男<else /> 女</if></td>
+      </tr>
+        <tr>
+        <th class="text-r" width="80">婚姻：</th>
+        <td>{$info['marriage']}</td>
+      </tr>
+      <tr>
+        <th class="text-r">联系手机：</th>
+        <td><if condition="$info['phone']">({$info['phonecountrynum']}) {$info['phone']}<else />({$info['countrynum']}) {$info['tel']}</if></td>
+      </tr>
+      <tr>
+        <th class="text-r">年龄：</th>
+        <td>{$info['age']}岁</td>
+      </tr>
+      <tr>
+        <th class="text-r">身高：</th>
+        <td>{$info['height']}cm</td>
+      </tr>
+       <tr>
+        <th class="text-r">体重：</th>
+        <td>{$info['weight']}KG</td>
+      </tr>
+       <tr>
+        <th class="text-r">星座：</th>
+        <td>{$info['constellation']}</td>
+      </tr>
+       <tr>
+        <th class="text-r">职业：</th>
+        <td>{$info['name']}</td>
+      </tr>
+       <tr>
+        <th class="text-r">爱好：</th>
+        <td>{$info['hobbyname']}</td>
+      </tr>
+       <tr>
+        <th class="text-r">标签：</th>
+        <td>{$info['starsignname']}</td>
+      </tr>
+      
+      <tr>
+        <th class="text-r">注册时间：</th>
+        <td>{:date("Y-m-d H:i:s",$info['addtime'])}</td>
+      </tr>
+      <tr>
+        <th class="text-r">推荐者账号：</th>
+        <td><if condition="$info['pid'] gt 0 ">{$info["ptel"]}<else />无</if></td>
+      </tr>
+       <tr>
+        <th class="text-r">引者语：</th>
+        <td>{$info["guide"]}</td>
+      </tr>
+       <tr>
+        <th class="text-r">邀请问题：</th>
+        <td>&nbsp;</td>
+      </tr>
+      <volist name="info['questionlist']" id="vo">
+       <tr>
+        <th class="text-r">问题</th>
+        <td>{$vo["question_name"]}</td>
+      </tr>
+       <tr>
+        <th class="text-r">回答</th>
+        <td><if condition="$vo['question_answer']">{$vo["question_answer"]} <else />无</if></td>
+      </tr>
+      </volist>
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script>
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+<include file="Public:header" />
+
+<body>
+<div class="pd-20">
+	<div class="mt-20">
+		<table class="table table-border table-bordered table-bg table-hover table-sort">
+			<thead>
+				<tr class="text-c">
+					<th width="80">积分</th>
+					<th width="100">类型</th>
+					<th width="100">时间</th>
+				</tr>
+			</thead>
+			<tbody>
+			<volist name="list" id="val" key="k">
+				<tr class="text-c">
+					<td><div style="color:#093">{$val.score}</div></td>
+					<td>{$val.typename}</td>
+					<td>{:date("Y-m-d H:i:s",$val["addtime"])}</td>
+				</tr>
+			</volist>				
+			</tbody>
+		</table>
+	</div>
+</div>
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/layer/2.1/layer.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.js"></script> 
+<script type="text/javascript" src="__ROOT__/Public/Admin/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+$('.table-sort').dataTable({
+	"aaSorting": [[ 3, "asc" ]],//默认第几个排序
+	"bStateSave": true,//状态保存
+	"aoColumnDefs": [
+	  {"orderable":false,"aTargets":[0,2,1]}// 制定列不参与排序
+	]
+});
+</script>
+</body>
+</html>
